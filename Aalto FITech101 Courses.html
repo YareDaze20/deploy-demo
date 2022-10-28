@@ -1,0 +1,2184 @@
+<!DOCTYPE html>
+<html data-react-helmet="lang" lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"><style id="autocompletion.css">
+.ace_editor.ace_autocomplete .ace_marker-layer .ace_active-line {
+    background-color: #CAD6FA;
+    z-index: 1;
+}
+.ace_dark.ace_editor.ace_autocomplete .ace_marker-layer .ace_active-line {
+    background-color: #3a674e;
+}
+.ace_editor.ace_autocomplete .ace_line-hover {
+    border: 1px solid #abbffe;
+    margin-top: -1px;
+    background: rgba(233,233,253,0.4);
+    position: absolute;
+    z-index: 2;
+}
+.ace_dark.ace_editor.ace_autocomplete .ace_line-hover {
+    border: 1px solid rgba(109, 150, 13, 0.8);
+    background: rgba(58, 103, 78, 0.62);
+}
+.ace_completion-meta {
+    opacity: 0.5;
+    margin: 0.9em;
+}
+.ace_completion-message {
+    color: blue;
+}
+.ace_editor.ace_autocomplete .ace_completion-highlight{
+    color: #2d69c7;
+}
+.ace_dark.ace_editor.ace_autocomplete .ace_completion-highlight{
+    color: #93ca12;
+}
+.ace_editor.ace_autocomplete {
+    width: 300px;
+    z-index: 200000;
+    border: 1px lightgray solid;
+    position: fixed;
+    box-shadow: 2px 3px 5px rgba(0,0,0,.2);
+    line-height: 1.4;
+    background: #fefefe;
+    color: #111;
+}
+.ace_dark.ace_editor.ace_autocomplete {
+    border: 1px #484747 solid;
+    box-shadow: 2px 3px 5px rgba(0, 0, 0, 0.51);
+    line-height: 1.4;
+    background: #25282c;
+    color: #c1c1c1;
+}
+/*# sourceURL=ace/css/autocompletion.css */</style><style id="snippets.css">
+.ace_snippet-marker {
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    background: rgba(194, 193, 208, 0.09);
+    border: 1px dotted rgba(211, 208, 235, 0.62);
+    position: absolute;
+}
+/*# sourceURL=ace/css/snippets.css */</style><style id="ace_searchbox">
+
+/* ------------------------------------------------------------------------------------------
+ * Editor Search Form
+ * --------------------------------------------------------------------------------------- */
+.ace_search {
+    background-color: #ddd;
+    color: #666;
+    border: 1px solid #cbcbcb;
+    border-top: 0 none;
+    overflow: hidden;
+    margin: 0;
+    padding: 4px 6px 0 4px;
+    position: absolute;
+    top: 0;
+    z-index: 99;
+    white-space: normal;
+}
+.ace_search.left {
+    border-left: 0 none;
+    border-radius: 0px 0px 5px 0px;
+    left: 0;
+}
+.ace_search.right {
+    border-radius: 0px 0px 0px 5px;
+    border-right: 0 none;
+    right: 0;
+}
+
+.ace_search_form, .ace_replace_form {
+    margin: 0 20px 4px 0;
+    overflow: hidden;
+    line-height: 1.9;
+}
+.ace_replace_form {
+    margin-right: 0;
+}
+.ace_search_form.ace_nomatch {
+    outline: 1px solid red;
+}
+
+.ace_search_field {
+    border-radius: 3px 0 0 3px;
+    background-color: white;
+    color: black;
+    border: 1px solid #cbcbcb;
+    border-right: 0 none;
+    outline: 0;
+    padding: 0;
+    font-size: inherit;
+    margin: 0;
+    line-height: inherit;
+    padding: 0 6px;
+    min-width: 17em;
+    vertical-align: top;
+    min-height: 1.8em;
+    box-sizing: content-box;
+}
+.ace_searchbtn {
+    border: 1px solid #cbcbcb;
+    line-height: inherit;
+    display: inline-block;
+    padding: 0 6px;
+    background: #fff;
+    border-right: 0 none;
+    border-left: 1px solid #dcdcdc;
+    cursor: pointer;
+    margin: 0;
+    position: relative;
+    color: #666;
+}
+.ace_searchbtn:last-child {
+    border-radius: 0 3px 3px 0;
+    border-right: 1px solid #cbcbcb;
+}
+.ace_searchbtn:disabled {
+    background: none;
+    cursor: default;
+}
+.ace_searchbtn:hover {
+    background-color: #eef1f6;
+}
+.ace_searchbtn.prev, .ace_searchbtn.next {
+     padding: 0px 0.7em
+}
+.ace_searchbtn.prev:after, .ace_searchbtn.next:after {
+     content: "";
+     border: solid 2px #888;
+     width: 0.5em;
+     height: 0.5em;
+     border-width:  2px 0 0 2px;
+     display:inline-block;
+     transform: rotate(-45deg);
+}
+.ace_searchbtn.next:after {
+     border-width: 0 2px 2px 0 ;
+}
+.ace_searchbtn_close {
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAcCAYAAABRVo5BAAAAZ0lEQVR42u2SUQrAMAhDvazn8OjZBilCkYVVxiis8H4CT0VrAJb4WHT3C5xU2a2IQZXJjiQIRMdkEoJ5Q2yMqpfDIo+XY4k6h+YXOyKqTIj5REaxloNAd0xiKmAtsTHqW8sR2W5f7gCu5nWFUpVjZwAAAABJRU5ErkJggg==) no-repeat 50% 0;
+    border-radius: 50%;
+    border: 0 none;
+    color: #656565;
+    cursor: pointer;
+    font: 16px/16px Arial;
+    padding: 0;
+    height: 14px;
+    width: 14px;
+    top: 9px;
+    right: 7px;
+    position: absolute;
+}
+.ace_searchbtn_close:hover {
+    background-color: #656565;
+    background-position: 50% 100%;
+    color: white;
+}
+
+.ace_button {
+    margin-left: 2px;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -o-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    overflow: hidden;
+    opacity: 0.7;
+    border: 1px solid rgba(100,100,100,0.23);
+    padding: 1px;
+    box-sizing:    border-box!important;
+    color: black;
+}
+
+.ace_button:hover {
+    background-color: #eee;
+    opacity:1;
+}
+.ace_button:active {
+    background-color: #ddd;
+}
+
+.ace_button.checked {
+    border-color: #3399ff;
+    opacity:1;
+}
+
+.ace_search_options{
+    margin-bottom: 3px;
+    text-align: right;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -o-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    clear: both;
+}
+
+.ace_search_counter {
+    float: left;
+    font-family: arial;
+    padding: 0 8px;
+}
+/*# sourceURL=ace/css/ace_searchbox */</style><style id="ace-gruvbox">.ace-gruvbox .ace_gutter-active-line {
+  background-color: #3C3836;
+}
+
+.ace-gruvbox {
+  color: #EBDAB4;
+  background-color: #1D2021;
+}
+
+.ace-gruvbox .ace_invisible {
+  color: #504945;
+}
+
+.ace-gruvbox .ace_marker-layer .ace_selection {
+  background: rgba(179, 101, 57, 0.75)
+}
+
+.ace-gruvbox.ace_multiselect .ace_selection.ace_start {
+  box-shadow: 0 0 3px 0px #002240;
+}
+
+.ace-gruvbox .ace_keyword {
+  color: #8ec07c;
+}
+
+.ace-gruvbox .ace_comment {
+  font-style: italic;
+  color: #928375;
+}
+
+.ace-gruvbox .ace-statement {
+  color: red;
+}
+
+.ace-gruvbox .ace_variable {
+  color: #84A598;
+}
+
+.ace-gruvbox .ace_variable.ace_language {
+  color: #D2879B;
+}
+
+.ace-gruvbox .ace_constant {
+  color: #C2859A;
+}
+
+.ace-gruvbox .ace_constant.ace_language {
+  color: #C2859A;
+}
+
+.ace-gruvbox .ace_constant.ace_numeric {
+  color: #C2859A;
+}
+
+.ace-gruvbox .ace_string {
+  color: #B8BA37;
+}
+
+.ace-gruvbox .ace_support {
+  color: #F9BC41;
+}
+
+.ace-gruvbox .ace_support.ace_function {
+  color: #F84B3C;
+}
+
+.ace-gruvbox .ace_storage {
+  color: #8FBF7F;
+}
+
+.ace-gruvbox .ace_keyword.ace_operator {
+  color: #EBDAB4;
+}
+
+.ace-gruvbox .ace_punctuation.ace_operator {
+  color: yellow;
+}
+
+.ace-gruvbox .ace_marker-layer .ace_active-line {
+  background: #3C3836;
+}
+
+.ace-gruvbox .ace_marker-layer .ace_selected-word {
+  border-radius: 4px;
+  border: 8px solid #3f475d;
+}
+
+.ace-gruvbox .ace_print-margin {
+  width: 5px;
+  background: #3C3836;
+}
+
+.ace-gruvbox .ace_indent-guide {
+  background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAAEklEQVQImWNQUFD4z6Crq/sfAAuYAuYl+7lfAAAAAElFTkSuQmCC") right repeat-y;
+}
+
+.ace-gruvbox .ace_indent-guide-active {
+  background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAAZSURBVHjaYvj///9/hivKyv8BAAAA//8DACLqBhbvk+/eAAAAAElFTkSuQmCC") right repeat-y;
+}
+
+/*# sourceURL=ace/css/ace-gruvbox */</style><style id="ace-terminal-theme">.ace-terminal-theme .ace_gutter {
+  background: #1a0005;
+  color: steelblue
+}
+
+.ace-terminal-theme .ace_print-margin {
+  width: 1px;
+  background: #1a1a1a
+}
+
+.ace-terminal-theme {
+  background-color: black;
+  color: #DEDEDE
+}
+
+.ace-terminal-theme .ace_cursor {
+  color: #9F9F9F
+}
+
+.ace-terminal-theme .ace_marker-layer .ace_selection {
+  background: #424242
+}
+
+.ace-terminal-theme.ace_multiselect .ace_selection.ace_start {
+  box-shadow: 0 0 3px 0px black;
+}
+
+.ace-terminal-theme .ace_marker-layer .ace_step {
+  background: rgb(0, 0, 0)
+}
+
+.ace-terminal-theme .ace_marker-layer .ace_bracket {
+  background: #090;
+}
+
+.ace-terminal-theme .ace_marker-layer .ace_bracket-start {
+  background: #090;
+}
+
+.ace-terminal-theme .ace_marker-layer .ace_bracket-unmatched {
+  margin: -1px 0 0 -1px;
+  border: 1px solid #900
+}
+
+.ace-terminal-theme .ace_marker-layer .ace_active-line {
+  background: #2A2A2A
+}
+
+.ace-terminal-theme .ace_gutter-active-line {
+  background-color: #2A112A
+}
+
+.ace-terminal-theme .ace_marker-layer .ace_selected-word {
+  border: 1px solid #424242
+}
+
+.ace-terminal-theme .ace_invisible {
+  color: #343434
+}
+
+.ace-terminal-theme .ace_keyword,
+.ace-terminal-theme .ace_meta,
+.ace-terminal-theme .ace_storage,
+.ace-terminal-theme .ace_storage.ace_type,
+.ace-terminal-theme .ace_support.ace_type {
+  color: tomato
+}
+
+.ace-terminal-theme .ace_keyword.ace_operator {
+  color: deeppink
+}
+
+.ace-terminal-theme .ace_constant.ace_character,
+.ace-terminal-theme .ace_constant.ace_language,
+.ace-terminal-theme .ace_constant.ace_numeric,
+.ace-terminal-theme .ace_keyword.ace_other.ace_unit,
+.ace-terminal-theme .ace_support.ace_constant,
+.ace-terminal-theme .ace_variable.ace_parameter {
+  color: #E78C45
+}
+
+.ace-terminal-theme .ace_constant.ace_other {
+  color: gold
+}
+
+.ace-terminal-theme .ace_invalid {
+  color: yellow;
+  background-color: red
+}
+
+.ace-terminal-theme .ace_invalid.ace_deprecated {
+  color: #CED2CF;
+  background-color: #B798BF
+}
+
+.ace-terminal-theme .ace_fold {
+  background-color: #7AA6DA;
+  border-color: #DEDEDE
+}
+
+.ace-terminal-theme .ace_entity.ace_name.ace_function,
+.ace-terminal-theme .ace_support.ace_function,
+.ace-terminal-theme .ace_variable {
+  color: #7AA6DA
+}
+
+.ace-terminal-theme .ace_support.ace_class,
+.ace-terminal-theme .ace_support.ace_type {
+  color: #E7C547
+}
+
+.ace-terminal-theme .ace_heading,
+.ace-terminal-theme .ace_string {
+  color: #B9CA4A
+}
+
+.ace-terminal-theme .ace_entity.ace_name.ace_tag,
+.ace-terminal-theme .ace_entity.ace_other.ace_attribute-name,
+.ace-terminal-theme .ace_meta.ace_tag,
+.ace-terminal-theme .ace_string.ace_regexp,
+.ace-terminal-theme .ace_variable {
+  color: #D54E53
+}
+
+.ace-terminal-theme .ace_comment {
+  color: orangered
+}
+
+.ace-terminal-theme .ace_indent-guide {
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAAEklEQVQImWNgYGBgYLBWV/8PAAK4AYnhiq+xAAAAAElFTkSuQmCC) right repeat-y;
+}
+
+.ace-terminal-theme .ace_indent-guide-active {
+  background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAAZSURBVHjaYvj///9/hivKyv8BAAAA//8DACLqBhbvk+/eAAAAAElFTkSuQmCC") right repeat-y;
+}
+
+/*# sourceURL=ace/css/ace-terminal-theme */</style><style id="ace-solarized-light">.ace-solarized-light .ace_gutter {
+  background: #fbf1d3;
+  color: #333
+}
+
+.ace-solarized-light .ace_print-margin {
+  width: 1px;
+  background: #e8e8e8
+}
+
+.ace-solarized-light {
+  background-color: #FDF6E3;
+  color: #586E75
+}
+
+.ace-solarized-light .ace_cursor {
+  color: #000000
+}
+
+.ace-solarized-light .ace_marker-layer .ace_selection {
+  background: rgba(7, 54, 67, 0.09)
+}
+
+.ace-solarized-light.ace_multiselect .ace_selection.ace_start {
+  box-shadow: 0 0 3px 0px #FDF6E3;
+}
+
+.ace-solarized-light .ace_marker-layer .ace_step {
+  background: rgb(255, 255, 0)
+}
+
+.ace-solarized-light .ace_marker-layer .ace_bracket {
+  margin: -1px 0 0 -1px;
+  border: 1px solid rgba(147, 161, 161, 0.50)
+}
+
+.ace-solarized-light .ace_marker-layer .ace_active-line {
+  background: #EEE8D5
+}
+
+.ace-solarized-light .ace_gutter-active-line {
+  background-color : #EDE5C1
+}
+
+.ace-solarized-light .ace_marker-layer .ace_selected-word {
+  border: 1px solid #7f9390
+}
+
+.ace-solarized-light .ace_invisible {
+  color: rgba(147, 161, 161, 0.50)
+}
+
+.ace-solarized-light .ace_keyword,
+.ace-solarized-light .ace_meta,
+.ace-solarized-light .ace_support.ace_class,
+.ace-solarized-light .ace_support.ace_type {
+  color: #859900
+}
+
+.ace-solarized-light .ace_constant.ace_character,
+.ace-solarized-light .ace_constant.ace_other {
+  color: #CB4B16
+}
+
+.ace-solarized-light .ace_constant.ace_language {
+  color: #B58900
+}
+
+.ace-solarized-light .ace_constant.ace_numeric {
+  color: #D33682
+}
+
+.ace-solarized-light .ace_fold {
+  background-color: #268BD2;
+  border-color: #586E75
+}
+
+.ace-solarized-light .ace_entity.ace_name.ace_function,
+.ace-solarized-light .ace_entity.ace_name.ace_tag,
+.ace-solarized-light .ace_support.ace_function,
+.ace-solarized-light .ace_variable,
+.ace-solarized-light .ace_variable.ace_language {
+  color: #268BD2
+}
+
+.ace-solarized-light .ace_storage {
+  color: #073642
+}
+
+.ace-solarized-light .ace_string {
+  color: #2AA198
+}
+
+.ace-solarized-light .ace_string.ace_regexp {
+  color: #D30102
+}
+
+.ace-solarized-light .ace_comment,
+.ace-solarized-light .ace_entity.ace_other.ace_attribute-name {
+  color: #93A1A1
+}
+
+.ace-solarized-light .ace_indent-guide {
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAAEklEQVQImWNgYGBgYHjy8NJ/AAjgA5fzQUmBAAAAAElFTkSuQmCC) right repeat-y
+}
+
+.ace-solarized-light .ace_indent-guide-active {
+  background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAAZSURBVHjaYvj///9/hivKyv8BAAAA//8DACLqBhbvk+/eAAAAAElFTkSuQmCC") right repeat-y;
+} 
+
+/*# sourceURL=ace/css/ace-solarized-light */</style><style id="ace-solarized-dark">.ace-solarized-dark .ace_gutter {
+  background: #01313f;
+  color: #d0edf7
+}
+
+.ace-solarized-dark .ace_print-margin {
+  width: 1px;
+  background: #33555E
+}
+
+.ace-solarized-dark {
+  background-color: #002B36;
+  color: #93A1A1
+}
+
+.ace-solarized-dark .ace_entity.ace_other.ace_attribute-name,
+.ace-solarized-dark .ace_storage {
+  color: #93A1A1
+}
+
+.ace-solarized-dark .ace_cursor,
+.ace-solarized-dark .ace_string.ace_regexp {
+  color: #D30102
+}
+
+.ace-solarized-dark .ace_marker-layer .ace_active-line,
+.ace-solarized-dark .ace_marker-layer .ace_selection {
+  background: rgba(255, 255, 255, 0.1)
+}
+
+.ace-solarized-dark.ace_multiselect .ace_selection.ace_start {
+  box-shadow: 0 0 3px 0px #002B36;
+}
+
+.ace-solarized-dark .ace_marker-layer .ace_step {
+  background: rgb(102, 82, 0)
+}
+
+.ace-solarized-dark .ace_marker-layer .ace_bracket {
+  margin: -1px 0 0 -1px;
+  border: 1px solid rgba(147, 161, 161, 0.50)
+}
+
+.ace-solarized-dark .ace_gutter-active-line {
+  background-color: #0d3440
+}
+
+.ace-solarized-dark .ace_marker-layer .ace_selected-word {
+  border: 1px solid #073642
+}
+
+.ace-solarized-dark .ace_invisible {
+  color: rgba(147, 161, 161, 0.50)
+}
+
+.ace-solarized-dark .ace_keyword,
+.ace-solarized-dark .ace_meta,
+.ace-solarized-dark .ace_support.ace_class,
+.ace-solarized-dark .ace_support.ace_type {
+  color: #859900
+}
+
+.ace-solarized-dark .ace_constant.ace_character,
+.ace-solarized-dark .ace_constant.ace_other {
+  color: #CB4B16
+}
+
+.ace-solarized-dark .ace_constant.ace_language {
+  color: #B58900
+}
+
+.ace-solarized-dark .ace_constant.ace_numeric {
+  color: #D33682
+}
+
+.ace-solarized-dark .ace_fold {
+  background-color: #268BD2;
+  border-color: #93A1A1
+}
+
+.ace-solarized-dark .ace_entity.ace_name.ace_function,
+.ace-solarized-dark .ace_entity.ace_name.ace_tag,
+.ace-solarized-dark .ace_support.ace_function,
+.ace-solarized-dark .ace_variable,
+.ace-solarized-dark .ace_variable.ace_language {
+  color: #268BD2
+}
+
+.ace-solarized-dark .ace_string {
+  color: #2AA198
+}
+
+.ace-solarized-dark .ace_comment {
+  font-style: italic;
+  color: #657B83
+}
+
+.ace-solarized-dark .ace_indent-guide {
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAAEklEQVQImWNg0Db1ZVCxc/sPAAd4AlUHlLenAAAAAElFTkSuQmCC) right repeat-y
+}
+
+.ace-solarized-dark .ace_indent-guide-active {
+  background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAAZSURBVHjaYvj///9/hivKyv8BAAAA//8DACLqBhbvk+/eAAAAAElFTkSuQmCC") right repeat-y;
+}
+
+/*# sourceURL=ace/css/ace-solarized-dark */</style><style id="ace-xcode">/* THIS THEME WAS AUTOGENERATED BY Theme.tmpl.css (UUID: EE3AD170-2B7F-4DE1-B724-C75F13FE0085) */
+
+.ace-xcode .ace_gutter {
+  background: #e8e8e8;
+  color: #333
+}
+
+.ace-xcode .ace_print-margin {
+  width: 1px;
+  background: #e8e8e8
+}
+
+.ace-xcode {
+  background-color: #FFFFFF;
+  color: #000000
+}
+
+.ace-xcode .ace_cursor {
+  color: #000000
+}
+
+.ace-xcode .ace_marker-layer .ace_selection {
+  background: #B5D5FF
+}
+
+.ace-xcode.ace_multiselect .ace_selection.ace_start {
+  box-shadow: 0 0 3px 0px #FFFFFF;
+}
+
+.ace-xcode .ace_marker-layer .ace_step {
+  background: rgb(198, 219, 174)
+}
+
+.ace-xcode .ace_marker-layer .ace_bracket {
+  margin: -1px 0 0 -1px;
+  border: 1px solid #BFBFBF
+}
+
+.ace-xcode .ace_marker-layer .ace_active-line {
+  background: rgba(0, 0, 0, 0.071)
+}
+
+.ace-xcode .ace_gutter-active-line {
+  background-color: rgba(0, 0, 0, 0.071)
+}
+
+.ace-xcode .ace_marker-layer .ace_selected-word {
+  border: 1px solid #B5D5FF
+}
+
+.ace-xcode .ace_constant.ace_language,
+.ace-xcode .ace_keyword,
+.ace-xcode .ace_meta,
+.ace-xcode .ace_variable.ace_language {
+  color: #C800A4
+}
+
+.ace-xcode .ace_invisible {
+  color: #BFBFBF
+}
+
+.ace-xcode .ace_constant.ace_character,
+.ace-xcode .ace_constant.ace_other {
+  color: #275A5E
+}
+
+.ace-xcode .ace_constant.ace_numeric {
+  color: #3A00DC
+}
+
+.ace-xcode .ace_entity.ace_other.ace_attribute-name,
+.ace-xcode .ace_support.ace_constant,
+.ace-xcode .ace_support.ace_function {
+  color: #450084
+}
+
+.ace-xcode .ace_fold {
+  background-color: #C800A4;
+  border-color: #000000
+}
+
+.ace-xcode .ace_entity.ace_name.ace_tag,
+.ace-xcode .ace_support.ace_class,
+.ace-xcode .ace_support.ace_type {
+  color: #790EAD
+}
+
+.ace-xcode .ace_storage {
+  color: #C900A4
+}
+
+.ace-xcode .ace_string {
+  color: #DF0002
+}
+
+.ace-xcode .ace_comment {
+  color: #008E00
+}
+
+.ace-xcode .ace_indent-guide {
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAAE0lEQVQImWP4////f4bLly//BwAmVgd1/w11/gAAAABJRU5ErkJggg==) right repeat-y
+}
+
+.ace-xcode .ace_indent-guide-active {
+  background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAAZSURBVHjaYvj///9/hivKyv8BAAAA//8DACLqBhbvk+/eAAAAAElFTkSuQmCC") right repeat-y;
+} 
+
+/*# sourceURL=ace/css/ace-xcode */</style><style id="ace-twilight">.ace-twilight .ace_gutter {
+  background: #232323;
+  color: #E2E2E2
+}
+
+.ace-twilight .ace_print-margin {
+  width: 1px;
+  background: #232323
+}
+
+.ace-twilight {
+  background-color: #141414;
+  color: #F8F8F8
+}
+
+.ace-twilight .ace_cursor {
+  color: #A7A7A7
+}
+
+.ace-twilight .ace_marker-layer .ace_selection {
+  background: rgba(221, 240, 255, 0.20)
+}
+
+.ace-twilight.ace_multiselect .ace_selection.ace_start {
+  box-shadow: 0 0 3px 0px #141414;
+}
+
+.ace-twilight .ace_marker-layer .ace_step {
+  background: rgb(102, 82, 0)
+}
+
+.ace-twilight .ace_marker-layer .ace_bracket {
+  margin: -1px 0 0 -1px;
+  border: 1px solid rgba(255, 255, 255, 0.25)
+}
+
+.ace-twilight .ace_marker-layer .ace_active-line {
+  background: rgba(255, 255, 255, 0.031)
+}
+
+.ace-twilight .ace_gutter-active-line {
+  background-color: rgba(255, 255, 255, 0.031)
+}
+
+.ace-twilight .ace_marker-layer .ace_selected-word {
+  border: 1px solid rgba(221, 240, 255, 0.20)
+}
+
+.ace-twilight .ace_invisible {
+  color: rgba(255, 255, 255, 0.25)
+}
+
+.ace-twilight .ace_keyword,
+.ace-twilight .ace_meta {
+  color: #CDA869
+}
+
+.ace-twilight .ace_constant,
+.ace-twilight .ace_constant.ace_character,
+.ace-twilight .ace_constant.ace_character.ace_escape,
+.ace-twilight .ace_constant.ace_other,
+.ace-twilight .ace_heading,
+.ace-twilight .ace_markup.ace_heading,
+.ace-twilight .ace_support.ace_constant {
+  color: #CF6A4C
+}
+
+.ace-twilight .ace_invalid.ace_illegal {
+  color: #F8F8F8;
+  background-color: rgba(86, 45, 86, 0.75)
+}
+
+.ace-twilight .ace_invalid.ace_deprecated {
+  text-decoration: underline;
+  font-style: italic;
+  color: #D2A8A1
+}
+
+.ace-twilight .ace_support {
+  color: #9B859D
+}
+
+.ace-twilight .ace_fold {
+  background-color: #AC885B;
+  border-color: #F8F8F8
+}
+
+.ace-twilight .ace_support.ace_function {
+  color: #DAD085
+}
+
+.ace-twilight .ace_list,
+.ace-twilight .ace_markup.ace_list,
+.ace-twilight .ace_storage {
+  color: #F9EE98
+}
+
+.ace-twilight .ace_entity.ace_name.ace_function,
+.ace-twilight .ace_meta.ace_tag {
+  color: #AC885B
+}
+
+.ace-twilight .ace_string {
+  color: #8F9D6A
+}
+
+.ace-twilight .ace_string.ace_regexp {
+  color: #E9C062
+}
+
+.ace-twilight .ace_comment {
+  font-style: italic;
+  color: #5F5A60
+}
+
+.ace-twilight .ace_variable {
+  color: #7587A6
+}
+
+.ace-twilight .ace_xml-pe {
+  color: #494949
+}
+
+.ace-twilight .ace_indent-guide {
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAAEklEQVQImWMQERFpYLC1tf0PAAgOAnPnhxyiAAAAAElFTkSuQmCC) right repeat-y
+}
+
+.ace-twilight .ace_indent-guide-active {
+  background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAAZSURBVHjaYvj///9/hivKyv8BAAAA//8DACLqBhbvk+/eAAAAAElFTkSuQmCC") right repeat-y;
+}
+
+/*# sourceURL=ace/css/ace-twilight */</style><style id="ace-kuroir">/* THIS THEME WAS AUTOGENERATED BY Theme.tmpl.css (UUID: 467560D0-6ACE-4409-82FD-4791420837AC) */
+
+.ace-kuroir .ace_gutter {
+  background: #e8e8e8;
+  color: #333;
+}
+
+.ace-kuroir .ace_print-margin {
+  width: 1px;
+  background: #e8e8e8;
+}
+
+.ace-kuroir {
+  background-color: #E8E9E8;
+  color: #363636;
+}
+
+.ace-kuroir .ace_cursor {
+  color: #202020;
+}
+
+.ace-kuroir .ace_marker-layer .ace_selection {
+  background: rgba(245, 170, 0, 0.57);
+}
+
+.ace-kuroir.ace_multiselect .ace_selection.ace_start {
+  box-shadow: 0 0 3px 0px #E8E9E8;
+}
+
+.ace-kuroir .ace_marker-layer .ace_step {
+  background: rgb(198, 219, 174);
+}
+
+.ace-kuroir .ace_marker-layer .ace_bracket {
+  margin: -1px 0 0 -1px;
+  border: 1px solid rgba(0, 0, 0, 0.29);
+}
+
+.ace-kuroir .ace_marker-layer .ace_active-line {
+  background: rgba(203, 220, 47, 0.22);
+}
+
+.ace-kuroir .ace_gutter-active-line {
+  background-color: rgba(203, 220, 47, 0.22);
+}
+
+.ace-kuroir .ace_marker-layer .ace_selected-word {
+  border: 1px solid rgba(245, 170, 0, 0.57);
+}
+
+.ace-kuroir .ace_invisible {
+  color: #BFBFBF
+}
+
+.ace-kuroir .ace_fold {
+  border-color: #363636;
+}
+
+
+
+
+
+.ace-kuroir .ace_constant{color:#CD6839;}.ace-kuroir .ace_constant.ace_numeric{color:#9A5925;}.ace-kuroir .ace_support{color:#104E8B;}.ace-kuroir .ace_support.ace_function{color:#005273;}.ace-kuroir .ace_support.ace_constant{color:#CF6A4C;}.ace-kuroir .ace_storage{color:#A52A2A;}.ace-kuroir .ace_invalid.ace_illegal{color:#FD1224;
+background-color:rgba(255, 6, 0, 0.15);}.ace-kuroir .ace_invalid.ace_deprecated{text-decoration:underline;
+font-style:italic;
+color:#FD1732;
+background-color:#E8E9E8;}.ace-kuroir .ace_string{color:#639300;}.ace-kuroir .ace_string.ace_regexp{color:#417E00;
+background-color:#C9D4BE;}.ace-kuroir .ace_comment{color:rgba(148, 148, 148, 0.91);
+background-color:rgba(220, 220, 220, 0.56);}.ace-kuroir .ace_variable{color:#009ACD;}.ace-kuroir .ace_meta.ace_tag{color:#005273;}.ace-kuroir .ace_markup.ace_heading{color:#B8012D;
+background-color:rgba(191, 97, 51, 0.051);}.ace-kuroir .ace_markup.ace_list{color:#8F5B26;}
+
+.ace-kuroir .ace_indent-guide {
+    background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAAE0lEQVQImWP4////f4bLly//BwAmVgd1/w11/gAAAABJRU5ErkJggg==") right repeat-y;
+}
+
+.ace-kuroir .ace_indent-guide-active {
+  background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAAZSURBVHjaYvj///9/hivKyv8BAAAA//8DACLqBhbvk+/eAAAAAElFTkSuQmCC") right repeat-y;
+} 
+
+/*# sourceURL=ace/css/ace-kuroir */</style><style id="ace-tomorrow">.ace-tomorrow .ace_gutter {
+  background: #f6f6f6;
+  color: #4D4D4C
+}
+
+.ace-tomorrow .ace_print-margin {
+  width: 1px;
+  background: #f6f6f6
+}
+
+.ace-tomorrow {
+  background-color: #FFFFFF;
+  color: #4D4D4C
+}
+
+.ace-tomorrow .ace_cursor {
+  color: #AEAFAD
+}
+
+.ace-tomorrow .ace_marker-layer .ace_selection {
+  background: #D6D6D6
+}
+
+.ace-tomorrow.ace_multiselect .ace_selection.ace_start {
+  box-shadow: 0 0 3px 0px #FFFFFF;
+}
+
+.ace-tomorrow .ace_marker-layer .ace_step {
+  background: rgb(255, 255, 0)
+}
+
+.ace-tomorrow .ace_marker-layer .ace_bracket {
+  margin: -1px 0 0 -1px;
+  border: 1px solid #D1D1D1
+}
+
+.ace-tomorrow .ace_marker-layer .ace_active-line {
+  background: #EFEFEF
+}
+
+.ace-tomorrow .ace_gutter-active-line {
+  background-color : #dcdcdc
+}
+
+.ace-tomorrow .ace_marker-layer .ace_selected-word {
+  border: 1px solid #D6D6D6
+}
+
+.ace-tomorrow .ace_invisible {
+  color: #D1D1D1
+}
+
+.ace-tomorrow .ace_keyword,
+.ace-tomorrow .ace_meta,
+.ace-tomorrow .ace_storage,
+.ace-tomorrow .ace_storage.ace_type,
+.ace-tomorrow .ace_support.ace_type {
+  color: #8959A8
+}
+
+.ace-tomorrow .ace_keyword.ace_operator {
+  color: #3E999F
+}
+
+.ace-tomorrow .ace_constant.ace_character,
+.ace-tomorrow .ace_constant.ace_language,
+.ace-tomorrow .ace_constant.ace_numeric,
+.ace-tomorrow .ace_keyword.ace_other.ace_unit,
+.ace-tomorrow .ace_support.ace_constant,
+.ace-tomorrow .ace_variable.ace_parameter {
+  color: #F5871F
+}
+
+.ace-tomorrow .ace_constant.ace_other {
+  color: #666969
+}
+
+.ace-tomorrow .ace_invalid {
+  color: #FFFFFF;
+  background-color: #C82829
+}
+
+.ace-tomorrow .ace_invalid.ace_deprecated {
+  color: #FFFFFF;
+  background-color: #8959A8
+}
+
+.ace-tomorrow .ace_fold {
+  background-color: #4271AE;
+  border-color: #4D4D4C
+}
+
+.ace-tomorrow .ace_entity.ace_name.ace_function,
+.ace-tomorrow .ace_support.ace_function,
+.ace-tomorrow .ace_variable {
+  color: #4271AE
+}
+
+.ace-tomorrow .ace_support.ace_class,
+.ace-tomorrow .ace_support.ace_type {
+  color: #C99E00
+}
+
+.ace-tomorrow .ace_heading,
+.ace-tomorrow .ace_markup.ace_heading,
+.ace-tomorrow .ace_string {
+  color: #718C00
+}
+
+.ace-tomorrow .ace_entity.ace_name.ace_tag,
+.ace-tomorrow .ace_entity.ace_other.ace_attribute-name,
+.ace-tomorrow .ace_meta.ace_tag,
+.ace-tomorrow .ace_string.ace_regexp,
+.ace-tomorrow .ace_variable {
+  color: #C82829
+}
+
+.ace-tomorrow .ace_comment {
+  color: #8E908C
+}
+
+.ace-tomorrow .ace_indent-guide {
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAAE0lEQVQImWP4////f4bdu3f/BwAlfgctduB85QAAAABJRU5ErkJggg==) right repeat-y
+}
+
+.ace-tomorrow .ace_indent-guide-active {
+  background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAAZSURBVHjaYvj///9/hivKyv8BAAAA//8DACLqBhbvk+/eAAAAAElFTkSuQmCC") right repeat-y;
+} 
+
+/*# sourceURL=ace/css/ace-tomorrow */</style><style id="ace-monokai">.ace-monokai .ace_gutter {
+  background: #2F3129;
+  color: #8F908A
+}
+
+.ace-monokai .ace_print-margin {
+  width: 1px;
+  background: #555651
+}
+
+.ace-monokai {
+  background-color: #272822;
+  color: #F8F8F2
+}
+
+.ace-monokai .ace_cursor {
+  color: #F8F8F0
+}
+
+.ace-monokai .ace_marker-layer .ace_selection {
+  background: #49483E
+}
+
+.ace-monokai.ace_multiselect .ace_selection.ace_start {
+  box-shadow: 0 0 3px 0px #272822;
+}
+
+.ace-monokai .ace_marker-layer .ace_step {
+  background: rgb(102, 82, 0)
+}
+
+.ace-monokai .ace_marker-layer .ace_bracket {
+  margin: -1px 0 0 -1px;
+  border: 1px solid #49483E
+}
+
+.ace-monokai .ace_marker-layer .ace_active-line {
+  background: #202020
+}
+
+.ace-monokai .ace_gutter-active-line {
+  background-color: #272727
+}
+
+.ace-monokai .ace_marker-layer .ace_selected-word {
+  border: 1px solid #49483E
+}
+
+.ace-monokai .ace_invisible {
+  color: #52524d
+}
+
+.ace-monokai .ace_entity.ace_name.ace_tag,
+.ace-monokai .ace_keyword,
+.ace-monokai .ace_meta.ace_tag,
+.ace-monokai .ace_storage {
+  color: #F92672
+}
+
+.ace-monokai .ace_punctuation,
+.ace-monokai .ace_punctuation.ace_tag {
+  color: #fff
+}
+
+.ace-monokai .ace_constant.ace_character,
+.ace-monokai .ace_constant.ace_language,
+.ace-monokai .ace_constant.ace_numeric,
+.ace-monokai .ace_constant.ace_other {
+  color: #AE81FF
+}
+
+.ace-monokai .ace_invalid {
+  color: #F8F8F0;
+  background-color: #F92672
+}
+
+.ace-monokai .ace_invalid.ace_deprecated {
+  color: #F8F8F0;
+  background-color: #AE81FF
+}
+
+.ace-monokai .ace_support.ace_constant,
+.ace-monokai .ace_support.ace_function {
+  color: #66D9EF
+}
+
+.ace-monokai .ace_fold {
+  background-color: #A6E22E;
+  border-color: #F8F8F2
+}
+
+.ace-monokai .ace_storage.ace_type,
+.ace-monokai .ace_support.ace_class,
+.ace-monokai .ace_support.ace_type {
+  font-style: italic;
+  color: #66D9EF
+}
+
+.ace-monokai .ace_entity.ace_name.ace_function,
+.ace-monokai .ace_entity.ace_other,
+.ace-monokai .ace_entity.ace_other.ace_attribute-name,
+.ace-monokai .ace_variable {
+  color: #A6E22E
+}
+
+.ace-monokai .ace_variable.ace_parameter {
+  font-style: italic;
+  color: #FD971F
+}
+
+.ace-monokai .ace_string {
+  color: #E6DB74
+}
+
+.ace-monokai .ace_comment {
+  color: #75715E
+}
+
+.ace-monokai .ace_indent-guide {
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAAEklEQVQImWPQ0FD0ZXBzd/wPAAjVAoxeSgNeAAAAAElFTkSuQmCC) right repeat-y
+}
+
+.ace-monokai .ace_indent-guide-active {
+  background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAAZSURBVHjaYvj///9/hivKyv8BAAAA//8DACLqBhbvk+/eAAAAAElFTkSuQmCC") right repeat-y;
+}
+
+/*# sourceURL=ace/css/ace-monokai */</style><style id="ace-github">/* CSS style content from github's default pygments highlighter template.
+   Cursor and selection styles from textmate.css. */
+.ace-github .ace_gutter {
+  background: #e8e8e8;
+  color: #AAA;
+}
+
+.ace-github  {
+  background: #fff;
+  color: #000;
+}
+
+.ace-github .ace_keyword {
+  font-weight: bold;
+}
+
+.ace-github .ace_string {
+  color: #D14;
+}
+
+.ace-github .ace_variable.ace_class {
+  color: teal;
+}
+
+.ace-github .ace_constant.ace_numeric {
+  color: #099;
+}
+
+.ace-github .ace_constant.ace_buildin {
+  color: #0086B3;
+}
+
+.ace-github .ace_support.ace_function {
+  color: #0086B3;
+}
+
+.ace-github .ace_comment {
+  color: #998;
+  font-style: italic;
+}
+
+.ace-github .ace_variable.ace_language  {
+  color: #0086B3;
+}
+
+.ace-github .ace_paren {
+  font-weight: bold;
+}
+
+.ace-github .ace_boolean {
+  font-weight: bold;
+}
+
+.ace-github .ace_string.ace_regexp {
+  color: #009926;
+  font-weight: normal;
+}
+
+.ace-github .ace_variable.ace_instance {
+  color: teal;
+}
+
+.ace-github .ace_constant.ace_language {
+  font-weight: bold;
+}
+
+.ace-github .ace_cursor {
+  color: black;
+}
+
+.ace-github.ace_focus .ace_marker-layer .ace_active-line {
+  background: rgb(255, 255, 204);
+}
+.ace-github .ace_marker-layer .ace_active-line {
+  background: rgb(245, 245, 245);
+}
+
+.ace-github .ace_marker-layer .ace_selection {
+  background: rgb(181, 213, 255);
+}
+
+.ace-github.ace_multiselect .ace_selection.ace_start {
+  box-shadow: 0 0 3px 0px white;
+}
+/* bold keywords cause cursor issues for some fonts */
+/* this disables bold style for editor and keeps for static highlighter */
+.ace-github.ace_nobold .ace_line > span {
+    font-weight: normal !important;
+}
+
+.ace-github .ace_marker-layer .ace_step {
+  background: rgb(252, 255, 0);
+}
+
+.ace-github .ace_marker-layer .ace_stack {
+  background: rgb(164, 229, 101);
+}
+
+.ace-github .ace_marker-layer .ace_bracket {
+  margin: -1px 0 0 -1px;
+  border: 1px solid rgb(192, 192, 192);
+}
+
+.ace-github .ace_gutter-active-line {
+    background-color : rgba(0, 0, 0, 0.07);
+}
+
+.ace-github .ace_marker-layer .ace_selected-word {
+  background: rgb(250, 250, 255);
+  border: 1px solid rgb(200, 200, 250);
+}
+
+.ace-github .ace_invisible {
+  color: #BFBFBF
+}
+
+.ace-github .ace_print-margin {
+  width: 1px;
+  background: #e8e8e8;
+}
+
+.ace-github .ace_indent-guide {
+  background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAAE0lEQVQImWP4////f4bLly//BwAmVgd1/w11/gAAAABJRU5ErkJggg==") right repeat-y;
+}
+
+.ace-github .ace_indent-guide-active {
+  background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAAZSURBVHjaYvj///9/hivKyv8BAAAA//8DACLqBhbvk+/eAAAAAElFTkSuQmCC") right repeat-y;
+}
+
+/*# sourceURL=ace/css/ace-github */</style><style id="error_marker.css">
+    .error_widget_wrapper {
+        background: inherit;
+        color: inherit;
+        border:none
+    }
+    .error_widget {
+        border-top: solid 2px;
+        border-bottom: solid 2px;
+        margin: 5px 0;
+        padding: 10px 40px;
+        white-space: pre-wrap;
+    }
+    .error_widget.ace_error, .error_widget_arrow.ace_error{
+        border-color: #ff5a5a
+    }
+    .error_widget.ace_warning, .error_widget_arrow.ace_warning{
+        border-color: #F1D817
+    }
+    .error_widget.ace_info, .error_widget_arrow.ace_info{
+        border-color: #5a5a5a
+    }
+    .error_widget.ace_ok, .error_widget_arrow.ace_ok{
+        border-color: #5aaa5a
+    }
+    .error_widget_arrow {
+        position: absolute;
+        border: solid 5px;
+        border-top-color: transparent!important;
+        border-right-color: transparent!important;
+        border-left-color: transparent!important;
+        top: -5px;
+    }
+
+/*# sourceURL=ace/css/error_marker.css */</style><style id="ace-tm">.ace-tm .ace_gutter {
+  background: #f0f0f0;
+  color: #333;
+}
+
+.ace-tm .ace_print-margin {
+  width: 1px;
+  background: #e8e8e8;
+}
+
+.ace-tm .ace_fold {
+    background-color: #6B72E6;
+}
+
+.ace-tm {
+  background-color: #FFFFFF;
+  color: black;
+}
+
+.ace-tm .ace_cursor {
+  color: black;
+}
+        
+.ace-tm .ace_invisible {
+  color: rgb(191, 191, 191);
+}
+
+.ace-tm .ace_storage,
+.ace-tm .ace_keyword {
+  color: blue;
+}
+
+.ace-tm .ace_constant {
+  color: rgb(197, 6, 11);
+}
+
+.ace-tm .ace_constant.ace_buildin {
+  color: rgb(88, 72, 246);
+}
+
+.ace-tm .ace_constant.ace_language {
+  color: rgb(88, 92, 246);
+}
+
+.ace-tm .ace_constant.ace_library {
+  color: rgb(6, 150, 14);
+}
+
+.ace-tm .ace_invalid {
+  background-color: rgba(255, 0, 0, 0.1);
+  color: red;
+}
+
+.ace-tm .ace_support.ace_function {
+  color: rgb(60, 76, 114);
+}
+
+.ace-tm .ace_support.ace_constant {
+  color: rgb(6, 150, 14);
+}
+
+.ace-tm .ace_support.ace_type,
+.ace-tm .ace_support.ace_class {
+  color: rgb(109, 121, 222);
+}
+
+.ace-tm .ace_keyword.ace_operator {
+  color: rgb(104, 118, 135);
+}
+
+.ace-tm .ace_string {
+  color: rgb(3, 106, 7);
+}
+
+.ace-tm .ace_comment {
+  color: rgb(76, 136, 107);
+}
+
+.ace-tm .ace_comment.ace_doc {
+  color: rgb(0, 102, 255);
+}
+
+.ace-tm .ace_comment.ace_doc.ace_tag {
+  color: rgb(128, 159, 191);
+}
+
+.ace-tm .ace_constant.ace_numeric {
+  color: rgb(0, 0, 205);
+}
+
+.ace-tm .ace_variable {
+  color: rgb(49, 132, 149);
+}
+
+.ace-tm .ace_xml-pe {
+  color: rgb(104, 104, 91);
+}
+
+.ace-tm .ace_entity.ace_name.ace_function {
+  color: #0000A2;
+}
+
+
+.ace-tm .ace_heading {
+  color: rgb(12, 7, 255);
+}
+
+.ace-tm .ace_list {
+  color:rgb(185, 6, 144);
+}
+
+.ace-tm .ace_meta.ace_tag {
+  color:rgb(0, 22, 142);
+}
+
+.ace-tm .ace_string.ace_regex {
+  color: rgb(255, 0, 0)
+}
+
+.ace-tm .ace_marker-layer .ace_selection {
+  background: rgb(181, 213, 255);
+}
+.ace-tm.ace_multiselect .ace_selection.ace_start {
+  box-shadow: 0 0 3px 0px white;
+}
+.ace-tm .ace_marker-layer .ace_step {
+  background: rgb(252, 255, 0);
+}
+
+.ace-tm .ace_marker-layer .ace_stack {
+  background: rgb(164, 229, 101);
+}
+
+.ace-tm .ace_marker-layer .ace_bracket {
+  margin: -1px 0 0 -1px;
+  border: 1px solid rgb(192, 192, 192);
+}
+
+.ace-tm .ace_marker-layer .ace_active-line {
+  background: rgba(0, 0, 0, 0.07);
+}
+
+.ace-tm .ace_gutter-active-line {
+    background-color : #dcdcdc;
+}
+
+.ace-tm .ace_marker-layer .ace_selected-word {
+  background: rgb(250, 250, 255);
+  border: 1px solid rgb(200, 200, 250);
+}
+
+.ace-tm .ace_indent-guide {
+  background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAAE0lEQVQImWP4////f4bLly//BwAmVgd1/w11/gAAAABJRU5ErkJggg==") right repeat-y;
+}
+
+.ace-tm .ace_indent-guide-active {
+  background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAAZSURBVHjaYvj///9/hivKyv8BAAAA//8DACLqBhbvk+/eAAAAAElFTkSuQmCC") right repeat-y;
+}
+
+/*# sourceURL=ace/css/ace-tm */</style><style id="ace_editor.css">/*
+styles = []
+for (var i = 1; i < 16; i++) {
+    styles.push(".ace_br" + i + "{" + (
+        ["top-left", "top-right", "bottom-right", "bottom-left"]
+    ).map(function(x, j) {
+        return i & (1<<j) ? "border-" + x + "-radius: 3px;" : "" 
+    }).filter(Boolean).join(" ") + "}")
+}
+styles.join("\n")
+*/
+.ace_br1 {border-top-left-radius    : 3px;}
+.ace_br2 {border-top-right-radius   : 3px;}
+.ace_br3 {border-top-left-radius    : 3px; border-top-right-radius:    3px;}
+.ace_br4 {border-bottom-right-radius: 3px;}
+.ace_br5 {border-top-left-radius    : 3px; border-bottom-right-radius: 3px;}
+.ace_br6 {border-top-right-radius   : 3px; border-bottom-right-radius: 3px;}
+.ace_br7 {border-top-left-radius    : 3px; border-top-right-radius:    3px; border-bottom-right-radius: 3px;}
+.ace_br8 {border-bottom-left-radius : 3px;}
+.ace_br9 {border-top-left-radius    : 3px; border-bottom-left-radius:  3px;}
+.ace_br10{border-top-right-radius   : 3px; border-bottom-left-radius:  3px;}
+.ace_br11{border-top-left-radius    : 3px; border-top-right-radius:    3px; border-bottom-left-radius:  3px;}
+.ace_br12{border-bottom-right-radius: 3px; border-bottom-left-radius:  3px;}
+.ace_br13{border-top-left-radius    : 3px; border-bottom-right-radius: 3px; border-bottom-left-radius:  3px;}
+.ace_br14{border-top-right-radius   : 3px; border-bottom-right-radius: 3px; border-bottom-left-radius:  3px;}
+.ace_br15{border-top-left-radius    : 3px; border-top-right-radius:    3px; border-bottom-right-radius: 3px; border-bottom-left-radius: 3px;}
+
+
+.ace_editor {
+    position: relative;
+    overflow: hidden;
+    padding: 0;
+    font: 12px/normal 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;
+    direction: ltr;
+    text-align: left;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+.ace_scroller {
+    position: absolute;
+    overflow: hidden;
+    top: 0;
+    bottom: 0;
+    background-color: inherit;
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+    cursor: text;
+}
+
+.ace_content {
+    position: absolute;
+    box-sizing: border-box;
+    min-width: 100%;
+    contain: style size layout;
+    font-variant-ligatures: no-common-ligatures;
+}
+
+.ace_dragging .ace_scroller:before{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    content: '';
+    background: rgba(250, 250, 250, 0.01);
+    z-index: 1000;
+}
+.ace_dragging.ace_dark .ace_scroller:before{
+    background: rgba(0, 0, 0, 0.01);
+}
+
+.ace_gutter {
+    position: absolute;
+    overflow : hidden;
+    width: auto;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    cursor: default;
+    z-index: 4;
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+    contain: style size layout;
+}
+
+.ace_gutter-active-line {
+    position: absolute;
+    left: 0;
+    right: 0;
+}
+
+.ace_scroller.ace_scroll-left {
+    box-shadow: 17px 0 16px -16px rgba(0, 0, 0, 0.4) inset;
+}
+
+.ace_gutter-cell {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding-left: 19px;
+    padding-right: 6px;
+    background-repeat: no-repeat;
+}
+
+.ace_gutter-cell.ace_error {
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAABOFBMVEX/////////QRswFAb/Ui4wFAYwFAYwFAaWGAfDRymzOSH/PxswFAb/SiUwFAYwFAbUPRvjQiDllog5HhHdRybsTi3/Tyv9Tir+Syj/UC3////XurebMBIwFAb/RSHbPx/gUzfdwL3kzMivKBAwFAbbvbnhPx66NhowFAYwFAaZJg8wFAaxKBDZurf/RB6mMxb/SCMwFAYwFAbxQB3+RB4wFAb/Qhy4Oh+4QifbNRcwFAYwFAYwFAb/QRzdNhgwFAYwFAbav7v/Uy7oaE68MBK5LxLewr/r2NXewLswFAaxJw4wFAbkPRy2PyYwFAaxKhLm1tMwFAazPiQwFAaUGAb/QBrfOx3bvrv/VC/maE4wFAbRPBq6MRO8Qynew8Dp2tjfwb0wFAbx6eju5+by6uns4uH9/f36+vr/GkHjAAAAYnRSTlMAGt+64rnWu/bo8eAA4InH3+DwoN7j4eLi4xP99Nfg4+b+/u9B/eDs1MD1mO7+4PHg2MXa347g7vDizMLN4eG+Pv7i5evs/v79yu7S3/DV7/498Yv24eH+4ufQ3Ozu/v7+y13sRqwAAADLSURBVHjaZc/XDsFgGIBhtDrshlitmk2IrbHFqL2pvXf/+78DPokj7+Fz9qpU/9UXJIlhmPaTaQ6QPaz0mm+5gwkgovcV6GZzd5JtCQwgsxoHOvJO15kleRLAnMgHFIESUEPmawB9ngmelTtipwwfASilxOLyiV5UVUyVAfbG0cCPHig+GBkzAENHS0AstVF6bacZIOzgLmxsHbt2OecNgJC83JERmePUYq8ARGkJx6XtFsdddBQgZE2nPR6CICZhawjA4Fb/chv+399kfR+MMMDGOQAAAABJRU5ErkJggg==");
+    background-repeat: no-repeat;
+    background-position: 2px center;
+}
+
+.ace_gutter-cell.ace_warning {
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAmVBMVEX///8AAAD///8AAAAAAABPSzb/5sAAAAB/blH/73z/ulkAAAAAAAD85pkAAAAAAAACAgP/vGz/rkDerGbGrV7/pkQICAf////e0IsAAAD/oED/qTvhrnUAAAD/yHD/njcAAADuv2r/nz//oTj/p064oGf/zHAAAAA9Nir/tFIAAAD/tlTiuWf/tkIAAACynXEAAAAAAAAtIRW7zBpBAAAAM3RSTlMAABR1m7RXO8Ln31Z36zT+neXe5OzooRDfn+TZ4p3h2hTf4t3k3ucyrN1K5+Xaks52Sfs9CXgrAAAAjklEQVR42o3PbQ+CIBQFYEwboPhSYgoYunIqqLn6/z8uYdH8Vmdnu9vz4WwXgN/xTPRD2+sgOcZjsge/whXZgUaYYvT8QnuJaUrjrHUQreGczuEafQCO/SJTufTbroWsPgsllVhq3wJEk2jUSzX3CUEDJC84707djRc5MTAQxoLgupWRwW6UB5fS++NV8AbOZgnsC7BpEAAAAABJRU5ErkJggg==");
+    background-position: 2px center;
+}
+
+.ace_gutter-cell.ace_info {
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAAAAAA6mKC9AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAAJ0Uk5TAAB2k804AAAAPklEQVQY02NgIB68QuO3tiLznjAwpKTgNyDbMegwisCHZUETUZV0ZqOquBpXj2rtnpSJT1AEnnRmL2OgGgAAIKkRQap2htgAAAAASUVORK5CYII=");
+    background-position: 2px center;
+}
+.ace_dark .ace_gutter-cell.ace_info {
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQBAMAAADt3eJSAAAAJFBMVEUAAAChoaGAgIAqKiq+vr6tra1ZWVmUlJSbm5s8PDxubm56enrdgzg3AAAAAXRSTlMAQObYZgAAAClJREFUeNpjYMAPdsMYHegyJZFQBlsUlMFVCWUYKkAZMxZAGdxlDMQBAG+TBP4B6RyJAAAAAElFTkSuQmCC");
+}
+
+.ace_scrollbar {
+    contain: strict;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    z-index: 6;
+}
+
+.ace_scrollbar-inner {
+    position: absolute;
+    cursor: text;
+    left: 0;
+    top: 0;
+}
+
+.ace_scrollbar-v{
+    overflow-x: hidden;
+    overflow-y: scroll;
+    top: 0;
+}
+
+.ace_scrollbar-h {
+    overflow-x: scroll;
+    overflow-y: hidden;
+    left: 0;
+}
+
+.ace_print-margin {
+    position: absolute;
+    height: 100%;
+}
+
+.ace_text-input {
+    position: absolute;
+    z-index: 0;
+    width: 0.5em;
+    height: 1em;
+    opacity: 0;
+    background: transparent;
+    -moz-appearance: none;
+    appearance: none;
+    border: none;
+    resize: none;
+    outline: none;
+    overflow: hidden;
+    font: inherit;
+    padding: 0 1px;
+    margin: 0 -1px;
+    contain: strict;
+    -ms-user-select: text;
+    -moz-user-select: text;
+    -webkit-user-select: text;
+    user-select: text;
+    /*with `pre-line` chrome inserts &nbsp; instead of space*/
+    white-space: pre!important;
+}
+.ace_text-input.ace_composition {
+    background: transparent;
+    color: inherit;
+    z-index: 1000;
+    opacity: 1;
+}
+.ace_composition_placeholder { color: transparent }
+.ace_composition_marker { 
+    border-bottom: 1px solid;
+    position: absolute;
+    border-radius: 0;
+    margin-top: 1px;
+}
+
+[ace_nocontext=true] {
+    transform: none!important;
+    filter: none!important;
+    clip-path: none!important;
+    mask : none!important;
+    contain: none!important;
+    perspective: none!important;
+    mix-blend-mode: initial!important;
+    z-index: auto;
+}
+
+.ace_layer {
+    z-index: 1;
+    position: absolute;
+    overflow: hidden;
+    /* workaround for chrome bug https://github.com/ajaxorg/ace/issues/2312*/
+    word-wrap: normal;
+    white-space: pre;
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
+    /* setting pointer-events: auto; on node under the mouse, which changes
+        during scroll, will break mouse wheel scrolling in Safari */
+    pointer-events: none;
+}
+
+.ace_gutter-layer {
+    position: relative;
+    width: auto;
+    text-align: right;
+    pointer-events: auto;
+    height: 1000000px;
+    contain: style size layout;
+}
+
+.ace_text-layer {
+    font: inherit !important;
+    position: absolute;
+    height: 1000000px;
+    width: 1000000px;
+    contain: style size layout;
+}
+
+.ace_text-layer > .ace_line, .ace_text-layer > .ace_line_group {
+    contain: style size layout;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+.ace_hidpi .ace_text-layer,
+.ace_hidpi .ace_gutter-layer,
+.ace_hidpi .ace_content,
+.ace_hidpi .ace_gutter {
+    contain: strict;
+    will-change: transform;
+}
+.ace_hidpi .ace_text-layer > .ace_line, 
+.ace_hidpi .ace_text-layer > .ace_line_group {
+    contain: strict;
+}
+
+.ace_cjk {
+    display: inline-block;
+    text-align: center;
+}
+
+.ace_cursor-layer {
+    z-index: 4;
+}
+
+.ace_cursor {
+    z-index: 4;
+    position: absolute;
+    box-sizing: border-box;
+    border-left: 2px solid;
+    /* workaround for smooth cursor repaintng whole screen in chrome */
+    transform: translatez(0);
+}
+
+.ace_multiselect .ace_cursor {
+    border-left-width: 1px;
+}
+
+.ace_slim-cursors .ace_cursor {
+    border-left-width: 1px;
+}
+
+.ace_overwrite-cursors .ace_cursor {
+    border-left-width: 0;
+    border-bottom: 1px solid;
+}
+
+.ace_hidden-cursors .ace_cursor {
+    opacity: 0.2;
+}
+
+.ace_hasPlaceholder .ace_hidden-cursors .ace_cursor {
+    opacity: 0;
+}
+
+.ace_smooth-blinking .ace_cursor {
+    transition: opacity 0.18s;
+}
+
+.ace_animate-blinking .ace_cursor {
+    animation-duration: 1000ms;
+    animation-timing-function: step-end;
+    animation-name: blink-ace-animate;
+    animation-iteration-count: infinite;
+}
+
+.ace_animate-blinking.ace_smooth-blinking .ace_cursor {
+    animation-duration: 1000ms;
+    animation-timing-function: ease-in-out;
+    animation-name: blink-ace-animate-smooth;
+}
+    
+@keyframes blink-ace-animate {
+    from, to { opacity: 1; }
+    60% { opacity: 0; }
+}
+
+@keyframes blink-ace-animate-smooth {
+    from, to { opacity: 1; }
+    45% { opacity: 1; }
+    60% { opacity: 0; }
+    85% { opacity: 0; }
+}
+
+.ace_marker-layer .ace_step, .ace_marker-layer .ace_stack {
+    position: absolute;
+    z-index: 3;
+}
+
+.ace_marker-layer .ace_selection {
+    position: absolute;
+    z-index: 5;
+}
+
+.ace_marker-layer .ace_bracket {
+    position: absolute;
+    z-index: 6;
+}
+
+.ace_marker-layer .ace_error_bracket {
+    position: absolute;
+    border-bottom: 1px solid #DE5555;
+    border-radius: 0;
+}
+
+.ace_marker-layer .ace_active-line {
+    position: absolute;
+    z-index: 2;
+}
+
+.ace_marker-layer .ace_selected-word {
+    position: absolute;
+    z-index: 4;
+    box-sizing: border-box;
+}
+
+.ace_line .ace_fold {
+    box-sizing: border-box;
+
+    display: inline-block;
+    height: 11px;
+    margin-top: -2px;
+    vertical-align: middle;
+
+    background-image:
+        url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAAAJCAYAAADU6McMAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAJpJREFUeNpi/P//PwOlgAXGYGRklAVSokD8GmjwY1wasKljQpYACtpCFeADcHVQfQyMQAwzwAZI3wJKvCLkfKBaMSClBlR7BOQikCFGQEErIH0VqkabiGCAqwUadAzZJRxQr/0gwiXIal8zQQPnNVTgJ1TdawL0T5gBIP1MUJNhBv2HKoQHHjqNrA4WO4zY0glyNKLT2KIfIMAAQsdgGiXvgnYAAAAASUVORK5CYII="),
+        url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAA3CAYAAADNNiA5AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAACJJREFUeNpi+P//fxgTAwPDBxDxD078RSX+YeEyDFMCIMAAI3INmXiwf2YAAAAASUVORK5CYII=");
+    background-repeat: no-repeat, repeat-x;
+    background-position: center center, top left;
+    color: transparent;
+
+    border: 1px solid black;
+    border-radius: 2px;
+
+    cursor: pointer;
+    pointer-events: auto;
+}
+
+.ace_dark .ace_fold {
+}
+
+.ace_fold:hover{
+    background-image:
+        url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAAAJCAYAAADU6McMAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAJpJREFUeNpi/P//PwOlgAXGYGRklAVSokD8GmjwY1wasKljQpYACtpCFeADcHVQfQyMQAwzwAZI3wJKvCLkfKBaMSClBlR7BOQikCFGQEErIH0VqkabiGCAqwUadAzZJRxQr/0gwiXIal8zQQPnNVTgJ1TdawL0T5gBIP1MUJNhBv2HKoQHHjqNrA4WO4zY0glyNKLT2KIfIMAAQsdgGiXvgnYAAAAASUVORK5CYII="),
+        url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAA3CAYAAADNNiA5AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAACBJREFUeNpi+P//fz4TAwPDZxDxD5X4i5fLMEwJgAADAEPVDbjNw87ZAAAAAElFTkSuQmCC");
+}
+
+.ace_tooltip {
+    background-color: #FFF;
+    background-image: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.1));
+    border: 1px solid gray;
+    border-radius: 1px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    color: black;
+    max-width: 100%;
+    padding: 3px 4px;
+    position: fixed;
+    z-index: 999999;
+    box-sizing: border-box;
+    cursor: default;
+    white-space: pre;
+    word-wrap: break-word;
+    line-height: normal;
+    font-style: normal;
+    font-weight: normal;
+    letter-spacing: normal;
+    pointer-events: none;
+}
+
+.ace_folding-enabled > .ace_gutter-cell {
+    padding-right: 13px;
+}
+
+.ace_fold-widget {
+    box-sizing: border-box;
+
+    margin: 0 -12px 0 1px;
+    display: none;
+    width: 11px;
+    vertical-align: top;
+
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAANElEQVR42mWKsQ0AMAzC8ixLlrzQjzmBiEjp0A6WwBCSPgKAXoLkqSot7nN3yMwR7pZ32NzpKkVoDBUxKAAAAABJRU5ErkJggg==");
+    background-repeat: no-repeat;
+    background-position: center;
+
+    border-radius: 3px;
+    
+    border: 1px solid transparent;
+    cursor: pointer;
+}
+
+.ace_folding-enabled .ace_fold-widget {
+    display: inline-block;   
+}
+
+.ace_fold-widget.ace_end {
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAANElEQVR42m3HwQkAMAhD0YzsRchFKI7sAikeWkrxwScEB0nh5e7KTPWimZki4tYfVbX+MNl4pyZXejUO1QAAAABJRU5ErkJggg==");
+}
+
+.ace_fold-widget.ace_closed {
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAAGCAYAAAAG5SQMAAAAOUlEQVR42jXKwQkAMAgDwKwqKD4EwQ26sSOkVWjgIIHAzPiCgaqiqnJHZnKICBERHN194O5b9vbLuAVRL+l0YWnZAAAAAElFTkSuQmCCXA==");
+}
+
+.ace_fold-widget:hover {
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    background-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 1px 1px rgba(255, 255, 255, 0.7);
+}
+
+.ace_fold-widget:active {
+    border: 1px solid rgba(0, 0, 0, 0.4);
+    background-color: rgba(0, 0, 0, 0.05);
+    box-shadow: 0 1px 1px rgba(255, 255, 255, 0.8);
+}
+/**
+ * Dark version for fold widgets
+ */
+.ace_dark .ace_fold-widget {
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHklEQVQIW2P4//8/AzoGEQ7oGCaLLAhWiSwB146BAQCSTPYocqT0AAAAAElFTkSuQmCC");
+}
+.ace_dark .ace_fold-widget.ace_end {
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAH0lEQVQIW2P4//8/AxQ7wNjIAjDMgC4AxjCVKBirIAAF0kz2rlhxpAAAAABJRU5ErkJggg==");
+}
+.ace_dark .ace_fold-widget.ace_closed {
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAAFCAYAAACAcVaiAAAAHElEQVQIW2P4//+/AxAzgDADlOOAznHAKgPWAwARji8UIDTfQQAAAABJRU5ErkJggg==");
+}
+.ace_dark .ace_fold-widget:hover {
+    box-shadow: 0 1px 1px rgba(255, 255, 255, 0.2);
+    background-color: rgba(255, 255, 255, 0.1);
+}
+.ace_dark .ace_fold-widget:active {
+    box-shadow: 0 1px 1px rgba(255, 255, 255, 0.2);
+}
+
+.ace_inline_button {
+    border: 1px solid lightgray;
+    display: inline-block;
+    margin: -1px 8px;
+    padding: 0 5px;
+    pointer-events: auto;
+    cursor: pointer;
+}
+.ace_inline_button:hover {
+    border-color: gray;
+    background: rgba(200,200,200,0.2);
+    display: inline-block;
+    pointer-events: auto;
+}
+
+.ace_fold-widget.ace_invalid {
+    background-color: #FFB4B4;
+    border-color: #DE5555;
+}
+
+.ace_fade-fold-widgets .ace_fold-widget {
+    transition: opacity 0.4s ease 0.05s;
+    opacity: 0;
+}
+
+.ace_fade-fold-widgets:hover .ace_fold-widget {
+    transition: opacity 0.05s ease 0.05s;
+    opacity:1;
+}
+
+.ace_underline {
+    text-decoration: underline;
+}
+
+.ace_bold {
+    font-weight: bold;
+}
+
+.ace_nobold .ace_bold {
+    font-weight: normal;
+}
+
+.ace_italic {
+    font-style: italic;
+}
+
+
+.ace_error-marker {
+    background-color: rgba(255, 0, 0,0.2);
+    position: absolute;
+    z-index: 9;
+}
+
+.ace_highlight-marker {
+    background-color: rgba(255, 255, 0,0.2);
+    position: absolute;
+    z-index: 8;
+}
+
+.ace_mobile-menu {
+    position: absolute;
+    line-height: 1.5;
+    border-radius: 4px;
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+    background: white;
+    box-shadow: 1px 3px 2px grey;
+    border: 1px solid #dcdcdc;
+    color: black;
+}
+.ace_dark > .ace_mobile-menu {
+    background: #333;
+    color: #ccc;
+    box-shadow: 1px 3px 2px grey;
+    border: 1px solid #444;
+
+}
+.ace_mobile-button {
+    padding: 2px;
+    cursor: pointer;
+    overflow: hidden;
+}
+.ace_mobile-button:hover {
+    background-color: #eee;
+    opacity:1;
+}
+.ace_mobile-button:active {
+    background-color: #ddd;
+}
+
+.ace_placeholder {
+    font-family: arial;
+    transform: scale(0.9);
+    transform-origin: left;
+    white-space: pre;
+    opacity: 0.7;
+    margin: 0 10px;
+}
+/*# sourceURL=ace/css/ace_editor.css */</style><meta charset="utf-8"><meta http-equiv="x-ua-compatible" content="ie=edge"><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><meta name="generator" content="Gatsby 4.22.0"><meta data-react-helmet="true" name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width"><meta data-react-helmet="true" http-equiv="Cache-Control" content="public, max-age=0, must-revalidate"><style data-href="/styles.3f5da7ae6d104ebff737.css" data-identity="gatsby-global-css">.rdrCalendarWrapper{background:#fff;box-sizing:border-box;display:inline-flex;flex-direction:column;-webkit-user-select:none;user-select:none}.rdrDateDisplay{display:flex;justify-content:space-between}.rdrDateDisplayItem{color:inherit;flex:1 1;text-align:center;width:0}.rdrDateDisplayItem+.rdrDateDisplayItem{margin-left:.833em}.rdrDateDisplayItem input{text-align:inherit}.rdrDateDisplayItem input:disabled{cursor:default}.rdrMonthAndYearWrapper{box-sizing:inherit;display:flex;justify-content:space-between}.rdrMonthAndYearPickers{align-items:center;display:flex;flex:1 1 auto;justify-content:center}.rdrNextPrevButton{box-sizing:inherit;cursor:pointer;outline:none}.rdrMonths{display:flex}.rdrMonthsVertical{flex-direction:column}.rdrMonthsHorizontal>div>div>div{display:flex;flex-direction:row}.rdrMonth{width:27.667em}.rdrWeekDays{display:flex}.rdrWeekDay{box-sizing:inherit;flex-basis:14.28571%;text-align:center}.rdrDays{display:flex;flex-wrap:wrap}.rdrInfiniteMonths{overflow:auto}.rdrDateRangeWrapper{-webkit-user-select:none;user-select:none}.rdrDateInput{position:relative}.rdrDateInput input{outline:none}.rdrDateInput .rdrWarning{color:red;font-size:1.6em;line-height:1.6em;position:absolute;right:.25em;top:0}.rdrDay{box-sizing:inherit;cursor:pointer;font:inherit;position:relative;width:14.28571%}.rdrDayNumber{display:block;position:relative}.rdrDayNumber span{color:#1d2429}.rdrDayDisabled{cursor:not-allowed}@supports (-ms-ime-align:auto){.rdrDay{flex-basis:14.285%!important}}.rdrEndEdge,.rdrInRange,.rdrSelected,.rdrStartEdge{pointer-events:none}.rdrDateRangePickerWrapper{display:inline-flex;-webkit-user-select:none;user-select:none}.rdrStaticRanges{display:flex;flex-direction:column}.rdrStaticRange{font-size:inherit}.rdrInputRange{display:flex}.rdrCalendarWrapper{color:#000;font-size:12px}.rdrDateDisplayWrapper{background-color:#eff2f7}.rdrDateDisplay{margin:.833em}.rdrDateDisplayItem{background-color:#fff;border:1px solid transparent;border-radius:4px;box-shadow:0 1px 2px 0 rgba(35,57,66,.21)}.rdrDateDisplayItem input{background:transparent;border:0;color:#849095;cursor:pointer;height:2.5em;line-height:2.5em;width:100%}.rdrDateDisplayItemActive{border-color:currentColor}.rdrDateDisplayItemActive input{color:#7d888d}.rdrMonthAndYearWrapper{align-items:center;height:60px;padding-top:10px}.rdrMonthAndYearPickers{font-weight:600}.rdrMonthAndYearPickers select{appearance:none;-webkit-appearance:none;background:transparent;background:url("data:image/svg+xml;utf8,<svg width='9px' height='6px' viewBox='0 0 9 6' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'><g id='Artboard' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd' transform='translate(-636.000000, -171.000000)' fill-opacity='0.368716033'><g id='input' transform='translate(172.000000, 37.000000)' fill='%230E242F' fill-rule='nonzero'><g id='Group-9' transform='translate(323.000000, 127.000000)'><path d='M142.280245,7.23952813 C141.987305,6.92353472 141.512432,6.92361662 141.219585,7.23971106 C140.926739,7.5558055 140.926815,8.06821394 141.219755,8.38420735 L145.498801,13 L149.780245,8.38162071 C150.073185,8.0656273 150.073261,7.55321886 149.780415,7.23712442 C149.487568,6.92102998 149.012695,6.92094808 148.719755,7.23694149 L145.498801,10.7113732 L142.280245,7.23952813 Z' id='arrow'></path></g></g></g></svg>") no-repeat;background-position:right 8px center;border:0;border-radius:4px;color:#3e484f;cursor:pointer;outline:0;padding:10px 30px 10px 10px;text-align:center}.rdrMonthAndYearPickers select:hover{background-color:rgba(0,0,0,.07)}.rdrMonthPicker,.rdrYearPicker{margin:0 5px}.rdrNextPrevButton{background:#eff2f7;border:0;border-radius:5px;display:block;height:24px;margin:0 .833em;padding:0;width:24px}.rdrNextPrevButton:hover{background:#e1e7f0}.rdrNextPrevButton i{border-style:solid;display:block;height:0;margin:auto;padding:0;text-align:center;width:0}.rdrNextPrevButton i,.rdrPprevButton i{-webkit-transform:translate(-3px);transform:translate(-3px)}.rdrPprevButton i{border-color:transparent #34495e transparent transparent;border-width:4px 6px 4px 4px}.rdrNextButton i{border-color:transparent transparent transparent #34495e;border-width:4px 4px 4px 6px;margin:0 0 0 7px;-webkit-transform:translate(3px);transform:translate(3px)}.rdrWeekDays{padding:0 .833em}.rdrMonth{padding:0 .833em 1.666em}.rdrMonth .rdrWeekDays{padding:0}.rdrMonths.rdrMonthsVertical .rdrMonth:first-child .rdrMonthName{display:none}.rdrWeekDay{color:#849095;font-weight:400;line-height:2.667em}.rdrDay{background:transparent;border:0;color:#1d2429;height:3em;line-height:3em;padding:0;text-align:center;-webkit-user-select:none;user-select:none}.rdrDay:focus{outline:0}.rdrDayNumber{align-items:center;bottom:0;bottom:5px;display:flex;font-weight:300;justify-content:center;left:0;outline:0;position:absolute;right:0;top:0;top:5px}.rdrDayToday .rdrDayNumber span{font-weight:500}.rdrDayToday .rdrDayNumber span:after{background:#3d91ff;border-radius:2px;bottom:4px;content:"";height:2px;left:50%;position:absolute;-webkit-transform:translate(-50%);transform:translate(-50%);width:18px}.rdrDayToday:not(.rdrDayPassive) .rdrEndEdge~.rdrDayNumber span:after,.rdrDayToday:not(.rdrDayPassive) .rdrInRange~.rdrDayNumber span:after,.rdrDayToday:not(.rdrDayPassive) .rdrSelected~.rdrDayNumber span:after,.rdrDayToday:not(.rdrDayPassive) .rdrStartEdge~.rdrDayNumber span:after{background:#fff}.rdrDay:not(.rdrDayPassive) .rdrEndEdge~.rdrDayNumber span,.rdrDay:not(.rdrDayPassive) .rdrInRange~.rdrDayNumber span,.rdrDay:not(.rdrDayPassive) .rdrSelected~.rdrDayNumber span,.rdrDay:not(.rdrDayPassive) .rdrStartEdge~.rdrDayNumber span{color:hsla(0,0%,100%,.85)}.rdrEndEdge,.rdrInRange,.rdrSelected,.rdrStartEdge{background:currentColor;bottom:5px;left:0;position:absolute;right:0;top:5px}.rdrSelected{left:2px;right:2px}.rdrStartEdge{border-bottom-left-radius:1.042em;border-top-left-radius:1.042em;left:2px}.rdrEndEdge{border-bottom-right-radius:1.042em;border-top-right-radius:1.042em;right:2px}.rdrSelected{border-radius:1.042em}.rdrDayStartOfMonth .rdrEndEdge,.rdrDayStartOfMonth .rdrInRange,.rdrDayStartOfWeek .rdrEndEdge,.rdrDayStartOfWeek .rdrInRange{border-bottom-left-radius:1.042em;border-top-left-radius:1.042em;left:2px}.rdrDayEndOfMonth .rdrInRange,.rdrDayEndOfMonth .rdrStartEdge,.rdrDayEndOfWeek .rdrInRange,.rdrDayEndOfWeek .rdrStartEdge{border-bottom-right-radius:1.042em;border-top-right-radius:1.042em;right:2px}.rdrDayStartOfMonth .rdrDayEndPreview,.rdrDayStartOfMonth .rdrDayInPreview,.rdrDayStartOfWeek .rdrDayEndPreview,.rdrDayStartOfWeek .rdrDayInPreview{border-bottom-left-radius:1.333em;border-left-width:1px;border-top-left-radius:1.333em;left:0}.rdrDayEndOfMonth .rdrDayInPreview,.rdrDayEndOfMonth .rdrDayStartPreview,.rdrDayEndOfWeek .rdrDayInPreview,.rdrDayEndOfWeek .rdrDayStartPreview{border-bottom-right-radius:1.333em;border-right-width:1px;border-top-right-radius:1.333em;right:0}.rdrDayEndPreview,.rdrDayInPreview,.rdrDayStartPreview{background:hsla(0,0%,100%,.09);border:0 solid;bottom:3px;left:0;pointer-events:none;position:absolute;right:0;top:3px;z-index:1}.rdrDayStartPreview{border-bottom-left-radius:1.333em;border-bottom-width:1px;border-left-width:1px;border-top-left-radius:1.333em;border-top-width:1px;left:0}.rdrDayEndPreview,.rdrDayInPreview{border-bottom-width:1px;border-top-width:1px}.rdrDayEndPreview{border-bottom-right-radius:1.333em;border-right-width:1px;border-top-right-radius:1.333em;right:2px;right:0}.rdrDefinedRangesWrapper{background:#fff;border-right:1px solid #eff2f7;font-size:12px;width:226px}.rdrDefinedRangesWrapper .rdrStaticRangeSelected{color:currentColor;font-weight:600}.rdrStaticRange{background:#fff;border:0;border-bottom:1px solid #eff2f7;cursor:pointer;display:block;outline:0;padding:0}.rdrStaticRange:focus .rdrStaticRangeLabel,.rdrStaticRange:hover .rdrStaticRangeLabel{background:#eff2f7}.rdrStaticRangeLabel{display:block;line-height:18px;outline:0;padding:10px 20px;text-align:left}.rdrInputRanges{padding:10px 0}.rdrInputRange{align-items:center;padding:5px 20px}.rdrInputRangeInput{border:1px solid #dee7eb;border-radius:4px;color:#6c767a;height:30px;line-height:30px;margin-right:10px;text-align:center;width:30px}.rdrInputRangeInput:focus,.rdrInputRangeInput:hover{border-color:#b4bfc4;color:#333;outline:0}.rdrCalendarWrapper:not(.rdrDateRangeWrapper) .rdrDayHovered .rdrDayNumber:after{background:transparent;border:1px solid;border-radius:1.333em;bottom:-2px;content:"";left:0;position:absolute;right:0;top:-2px}.rdrDayPassive{pointer-events:none}.rdrDayPassive .rdrDayNumber span{color:#d5dce0}.rdrDayPassive .rdrDayEndPreview,.rdrDayPassive .rdrDayInPreview,.rdrDayPassive .rdrDayStartPreview,.rdrDayPassive .rdrEndEdge,.rdrDayPassive .rdrInRange,.rdrDayPassive .rdrSelected,.rdrDayPassive .rdrStartEdge{display:none}.rdrDayDisabled{background-color:#f8f8f8}.rdrDayDisabled .rdrDayNumber span{color:#aeb9bf}.rdrDayDisabled .rdrDayEndPreview,.rdrDayDisabled .rdrDayInPreview,.rdrDayDisabled .rdrDayStartPreview,.rdrDayDisabled .rdrEndEdge,.rdrDayDisabled .rdrInRange,.rdrDayDisabled .rdrSelected,.rdrDayDisabled .rdrStartEdge{-webkit-filter:grayscale(100%) opacity(60%);filter:grayscale(100%) opacity(60%)}.rdrMonthName{color:#849095;font-weight:600;padding:.833em;text-align:left}code[class*=language-],pre[class*=language-]{word-wrap:normal;background:none;color:#000;font-family:Consolas,Monaco,Andale Mono,Ubuntu Mono,monospace;font-size:1em;-webkit-hyphens:none;hyphens:none;line-height:1.5;-o-tab-size:4;tab-size:4;text-align:left;text-shadow:0 1px #fff;white-space:pre;word-break:normal;word-spacing:normal}code[class*=language-] ::selection,code[class*=language-]::selection,pre[class*=language-] ::selection,pre[class*=language-]::selection{background:#b3d4fc;text-shadow:none}@media print{code[class*=language-],pre[class*=language-]{text-shadow:none}}pre[class*=language-]{margin:.5em 0}:not(pre)>code[class*=language-],pre[class*=language-]{background:#f5f2f0}:not(pre)>code[class*=language-]{border-radius:.3em;padding:.1em;white-space:normal}.token.cdata,.token.comment,.token.doctype,.token.prolog{color:#708090}.token.punctuation{color:#999}.token.namespace{opacity:.7}.token.boolean,.token.constant,.token.deleted,.token.number,.token.property,.token.symbol,.token.tag{color:#905}.token.attr-name,.token.builtin,.token.char,.token.inserted,.token.selector,.token.string{color:#690}.language-css .token.string,.style .token.string,.token.entity,.token.operator,.token.url{background:hsla(0,0%,100%,.5);color:#9a6e3a}.token.atrule,.token.attr-value,.token.keyword{color:#07a}.token.class-name,.token.function{color:#dd4a68}.token.important,.token.regex,.token.variable{color:#e90}.token.bold,.token.important{font-weight:700}.token.italic{font-style:italic}.token.entity{cursor:help}pre[class*=language-],span[id*=assignment-handout-] pre{min-width:100%}.gatsby-highlight,pre[class*=language-],span[id*=assignment-handout-] pre{background-color:#fff;box-shadow:0 2px 1px -1px rgba(0,0,0,.2),0 1px 1px 0 rgba(0,0,0,.14),0 1px 3px 0 rgba(0,0,0,.12);margin:1.125rem 0;overflow:auto;padding:1em}.gatsby-highlight pre[class*=language-]{background-color:transparent;box-shadow:none;float:left;margin:0;min-width:100%;overflow:initial;padding:0}pre[class*=language-].line-numbers{counter-reset:linenumber;padding-left:3.8em;position:relative}pre[class*=language-].line-numbers>code{position:relative;white-space:inherit}.line-numbers .line-numbers-rows{border-right:1px solid #999;font-size:100%;left:-3.8em;letter-spacing:-1px;pointer-events:none;position:absolute;top:0;-webkit-user-select:none;user-select:none;width:3em}.line-numbers-rows>span{counter-increment:linenumber;display:block}.line-numbers-rows>span:before{color:#999;content:counter(linenumber);display:block;padding-right:.8em;text-align:right}.gatsby-highlight-code-line{background-color:#feb;border-left:.25em solid #f99;display:block;margin-left:-1em;margin-right:-1em;padding-left:.75em;padding-right:1em}.gatsby-highlight pre[class*=language-].line-numbers{padding-left:2.8em}.gatsby-highlight pre[class*=language-shell].line-numbers{display:block;padding-left:0}.gatsby-highlight pre[class*=language-shell] .line-numbers-rows{display:none}.command-line-prompt{border-right:1px solid #999;display:block;float:left;font-size:100%;letter-spacing:-1px;margin-right:1em;pointer-events:none;text-align:right;-webkit-user-select:none;user-select:none}.command-line-prompt>span:before{opacity:.7}.command-line-prompt>span[data-user]:before{content:"[" attr(data-user) "@" attr(data-host) "] $"}.command-line-prompt>span[data-continuation-prompt]:before{content:attr(data-continuation-prompt)}.command-line span.token.output{opacity:.7}.command-line-prompt>span:before{color:#999;content:" ";display:block;padding-right:.8em}.command-line-prompt>span[data-user]:before{content:"terminal $"}.command-line-prompt>span[data-user=root]:before{content:"[" attr(data-user) "@" attr(data-host) "] #"}.command-line-prompt>span[data-prompt]:before{content:attr(data-prompt)}body,html{overflow-x:hidden!important;padding:0!important}.ytIframe{border:0;height:100%;left:0;position:absolute;top:0;width:99.9%}.html-tree-view-module--tree--mvuHd,.html-tree-view-module--tree--mvuHd li,.html-tree-view-module--tree--mvuHd ul{list-style:none;margin:0;padding:0;position:relative}.html-tree-view-module--tree--mvuHd{margin:1em;text-align:center}.html-tree-view-module--tree--mvuHd,.html-tree-view-module--tree--mvuHd ul{display:table}.html-tree-view-module--tree--mvuHd ul{width:100%}.html-tree-view-module--tree--mvuHd li{display:table-cell;padding:.5em 0;vertical-align:top}.html-tree-view-module--tree--mvuHd li:before{content:"";left:0;outline:1px solid #666;position:absolute;right:0;top:0}.html-tree-view-module--tree--mvuHd li:first-child:before{left:50%}.html-tree-view-module--tree--mvuHd li:last-child:before{right:50%}.html-tree-view-module--tree--mvuHd code,.html-tree-view-module--tree--mvuHd span{border:.1em solid #666;border-radius:.2em;display:inline-block;margin:0 .2em .5em;padding:.2em .5em;position:relative}.html-tree-view-module--tree--mvuHd code{font-family:monaco,Consolas,Lucida Console,monospace}.html-tree-view-module--tree--mvuHd code:before,.html-tree-view-module--tree--mvuHd span:before,.html-tree-view-module--tree--mvuHd ul:before{content:"";height:.5em;left:50%;outline:1px solid #666;position:absolute}.html-tree-view-module--tree--mvuHd ul:before{top:-.5em}.html-tree-view-module--tree--mvuHd code:before,.html-tree-view-module--tree--mvuHd span:before{top:-.55em}.html-tree-view-module--tree--mvuHd>li{margin-top:0}.html-tree-view-module--tree--mvuHd>li:after,.html-tree-view-module--tree--mvuHd>li:before,.html-tree-view-module--tree--mvuHd>li>code:before,.html-tree-view-module--tree--mvuHd>li>span:before{outline:none}</style><title>Aalto FITech101 Courses</title><link data-react-helmet="true" rel="icon" type="image/png" href="data:image/png;base64,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"><link rel="preload" as="font" type="font/woff2" crossorigin="anonymous" href="https://fitech101.aalto.fi/static/webfonts/s/teko/v15/LYjCdG7kmE0gdQhfsCRgqA.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin="anonymous" href="https://fitech101.aalto.fi/static/webfonts/s/teko/v15/LYjNdG7kmE0gfaN9pQ.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin="anonymous" href="https://fitech101.aalto.fi/static/webfonts/s/teko/v15/LYjCdG7kmE0gdVBesCRgqA.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin="anonymous" href="https://fitech101.aalto.fi/static/webfonts/s/teko/v15/LYjCdG7kmE0gdXxZsCRgqA.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin="anonymous" href="https://fitech101.aalto.fi/static/webfonts/s/teko/v15/LYjCdG7kmE0gdRhYsCRgqA.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin="anonymous" href="https://fitech101.aalto.fi/static/webfonts/s/roboto/v30/KFOlCnqEu92Fr1MmSU5fBBc4.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin="anonymous" href="https://fitech101.aalto.fi/static/webfonts/s/roboto/v30/KFOmCnqEu92Fr1Mu4mxK.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin="anonymous" href="https://fitech101.aalto.fi/static/webfonts/s/roboto/v30/KFOlCnqEu92Fr1MmEU9fBBc4.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin="anonymous" href="https://fitech101.aalto.fi/static/webfonts/s/roboto/v30/KFOlCnqEu92Fr1MmWUlfBBc4.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin="anonymous" href="https://fitech101.aalto.fi/static/webfonts/s/lora/v26/0QI8MX1D_JOuMw_hLdO6T2wV9KnW-MoFkq0.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin="anonymous" href="https://fitech101.aalto.fi/static/webfonts/s/lora/v26/0QI6MX1D_JOuGQbT0gvTJPa787weuyJD.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin="anonymous" href="https://fitech101.aalto.fi/static/webfonts/s/lora/v26/0QI6MX1D_JOuGQbT0gvTJPa787z5vCJD.woff2"><style>@font-face{font-display:swap;font-family:Teko;font-style:normal;font-weight:300;src:url(/static/webfonts/s/teko/v15/LYjCdG7kmE0gdQhfsCRgqA.woff2) format("woff2")}@font-face{font-display:swap;font-family:Teko;font-style:normal;font-weight:400;src:url(/static/webfonts/s/teko/v15/LYjNdG7kmE0gfaN9pQ.woff2) format("woff2")}@font-face{font-display:swap;font-family:Teko;font-style:normal;font-weight:500;src:url(/static/webfonts/s/teko/v15/LYjCdG7kmE0gdVBesCRgqA.woff2) format("woff2")}@font-face{font-display:swap;font-family:Teko;font-style:normal;font-weight:600;src:url(/static/webfonts/s/teko/v15/LYjCdG7kmE0gdXxZsCRgqA.woff2) format("woff2")}@font-face{font-display:swap;font-family:Teko;font-style:normal;font-weight:700;src:url(/static/webfonts/s/teko/v15/LYjCdG7kmE0gdRhYsCRgqA.woff2) format("woff2")}@font-face{font-display:swap;font-family:Teko;font-style:normal;font-weight:300;src:url(/static/webfonts/s/teko/v15/LYjCdG7kmE0gdQhfsCRgrg.woff) format("woff")}@font-face{font-display:swap;font-family:Teko;font-style:normal;font-weight:400;src:url(/static/webfonts/s/teko/v15/LYjNdG7kmE0gfaN9ow.woff) format("woff")}@font-face{font-display:swap;font-family:Teko;font-style:normal;font-weight:500;src:url(/static/webfonts/s/teko/v15/LYjCdG7kmE0gdVBesCRgrg.woff) format("woff")}@font-face{font-display:swap;font-family:Teko;font-style:normal;font-weight:600;src:url(/static/webfonts/s/teko/v15/LYjCdG7kmE0gdXxZsCRgrg.woff) format("woff")}@font-face{font-display:swap;font-family:Teko;font-style:normal;font-weight:700;src:url(/static/webfonts/s/teko/v15/LYjCdG7kmE0gdRhYsCRgrg.woff) format("woff")}@font-face{font-display:swap;font-family:Roboto;font-style:normal;font-weight:300;src:url(/static/webfonts/s/roboto/v30/KFOlCnqEu92Fr1MmSU5fBBc4.woff2) format("woff2")}@font-face{font-display:swap;font-family:Roboto;font-style:normal;font-weight:400;src:url(/static/webfonts/s/roboto/v30/KFOmCnqEu92Fr1Mu4mxK.woff2) format("woff2")}@font-face{font-display:swap;font-family:Roboto;font-style:normal;font-weight:500;src:url(/static/webfonts/s/roboto/v30/KFOlCnqEu92Fr1MmEU9fBBc4.woff2) format("woff2")}@font-face{font-display:swap;font-family:Roboto;font-style:normal;font-weight:700;src:url(/static/webfonts/s/roboto/v30/KFOlCnqEu92Fr1MmWUlfBBc4.woff2) format("woff2")}@font-face{font-display:swap;font-family:Roboto;font-style:normal;font-weight:300;src:url(/static/webfonts/s/roboto/v30/KFOlCnqEu92Fr1MmSU5fBBc-.woff) format("woff")}@font-face{font-display:swap;font-family:Roboto;font-style:normal;font-weight:400;src:url(/static/webfonts/s/roboto/v30/KFOmCnqEu92Fr1Mu4mxM.woff) format("woff")}@font-face{font-display:swap;font-family:Roboto;font-style:normal;font-weight:500;src:url(/static/webfonts/s/roboto/v30/KFOlCnqEu92Fr1MmEU9fBBc-.woff) format("woff")}@font-face{font-display:swap;font-family:Roboto;font-style:normal;font-weight:700;src:url(/static/webfonts/s/roboto/v30/KFOlCnqEu92Fr1MmWUlfBBc-.woff) format("woff")}@font-face{font-display:swap;font-family:Lora;font-style:italic;font-weight:400;src:url(/static/webfonts/s/lora/v26/0QI8MX1D_JOuMw_hLdO6T2wV9KnW-MoFkq0.woff2) format("woff2")}@font-face{font-display:swap;font-family:Lora;font-style:normal;font-weight:400;src:url(/static/webfonts/s/lora/v26/0QI6MX1D_JOuGQbT0gvTJPa787weuyJD.woff2) format("woff2")}@font-face{font-display:swap;font-family:Lora;font-style:normal;font-weight:700;src:url(/static/webfonts/s/lora/v26/0QI6MX1D_JOuGQbT0gvTJPa787z5vCJD.woff2) format("woff2")}@font-face{font-display:swap;font-family:Lora;font-style:italic;font-weight:400;src:url(/static/webfonts/s/lora/v26/0QI8MX1D_JOuMw_hLdO6T2wV9KnW-MoFkqs.woff) format("woff")}@font-face{font-display:swap;font-family:Lora;font-style:normal;font-weight:400;src:url(/static/webfonts/s/lora/v26/0QI6MX1D_JOuGQbT0gvTJPa787weuyJF.woff) format("woff")}@font-face{font-display:swap;font-family:Lora;font-style:normal;font-weight:700;src:url(/static/webfonts/s/lora/v26/0QI6MX1D_JOuGQbT0gvTJPa787z5vCJF.woff) format("woff")}</style><link rel="icon" href="https://fitech101.aalto.fi/favicon-32x32.png" type="image/png"><link rel="icon" href="https://fitech101.aalto.fi/favicon.svg" type="image/svg+xml"><link rel="manifest" href="https://fitech101.aalto.fi/manifest.webmanifest" crossorigin="anonymous"><link rel="apple-touch-icon" sizes="48x48" href="https://fitech101.aalto.fi/icons/icon-48x48.png"><link rel="apple-touch-icon" sizes="72x72" href="https://fitech101.aalto.fi/icons/icon-72x72.png"><link rel="apple-touch-icon" sizes="96x96" href="https://fitech101.aalto.fi/icons/icon-96x96.png"><link rel="apple-touch-icon" sizes="144x144" href="https://fitech101.aalto.fi/icons/icon-144x144.png"><link rel="apple-touch-icon" sizes="192x192" href="https://fitech101.aalto.fi/icons/icon-192x192.png"><link rel="apple-touch-icon" sizes="256x256" href="https://fitech101.aalto.fi/icons/icon-256x256.png"><link rel="apple-touch-icon" sizes="384x384" href="https://fitech101.aalto.fi/icons/icon-384x384.png"><link rel="apple-touch-icon" sizes="512x512" href="https://fitech101.aalto.fi/icons/icon-512x512.png"><style data-emotion="css-global 0" data-s=""></style><style data-emotion="css-global" data-s="">html{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;box-sizing:border-box;-webkit-text-size-adjust:100%;}*,*::before,*::after{box-sizing:inherit;}strong,b{font-weight:700;}body{margin:0;color:rgba(0, 0, 0, 0.87);font-family:"Roboto","Helvetica","Arial",sans-serif;font-weight:400;font-size:1rem;line-height:1.5;letter-spacing:0.00938em;background-color:#fff;}@media print{body{background-color:#fff;}}body::backdrop{background-color:#fff;}</style><style data-emotion="css-global" data-s="">html{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;box-sizing:border-box;-webkit-text-size-adjust:100%;}*,*::before,*::after{box-sizing:inherit;}strong,b{font-weight:700;}body{margin:0;color:rgba(0, 0, 0, 0.87);font-family:"Roboto","Helvetica","Arial",sans-serif;font-weight:400;font-size:1.125rem;line-height:1.5;letter-spacing:0.00833em;background-color:#fafafa;}@media (max-width:599.95px){body{font-size:1rem;letter-spacing:0.00938em;line-height:1.5;}}@media print{body{background-color:#fff;}}body::backdrop{background-color:#fafafa;}body{font-family:"Roboto","Helvetica","Arial",sans-serif;font-size:1.125rem;letter-spacing:0.00833em;line-height:1.5;}@media (max-width:599.95px){body{font-size:1rem;letter-spacing:0.00938em;line-height:1.5;}}</style><style data-emotion="css 15d8vn0 i6s8oy w3ze74 annblr t5muiy o7vnst 1t8mbjb qy903u i9gxme 39bbo6 u6x7xu vubbuv zthvur 1l8j5k8 15bvnbz n79vzb 1qu2wss fzbvyf ao0lzw 1c2b0az yq1z8n 2cos1f aa9ijd 49bjqz 1sfd1bq 1fxno5d efpkj6" data-s="">.css-15d8vn0{background-color:#fff;color:rgba(0, 0, 0, 0.87);-webkit-transition:box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;transition:box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;box-shadow:none;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column;width:100%;box-sizing:border-box;-webkit-flex-shrink:0;-ms-flex-negative:0;flex-shrink:0;position:fixed;z-index:1100;top:0;left:auto;right:0;background-color:#168AFD;color:#fff;background-color:#fff;color:#000;padding:0!important;}@media print{.css-15d8vn0{position:absolute;}}.css-i6s8oy{position:relative;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;padding-left:16px;padding-right:16px;min-height:56px;}@media (min-width:600px){.css-i6s8oy{padding-left:24px;padding-right:24px;}}@media (min-width:0px){@media (orientation: landscape){.css-i6s8oy{min-height:48px;}}}@media (min-width:600px){.css-i6s8oy{min-height:64px;}}.css-w3ze74{width:100%;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;}.css-annblr{margin:0;color:inherit;-webkit-text-decoration:underline;text-decoration:underline;color:inherit;font-family:"Teko","Helvetica",sans-serif;font-size:1.725rem;font-weight:400;letter-spacing:inherit;-webkit-text-decoration:none;text-decoration:none;color:#000;}.css-annblr:hover{text-decoration-color:inherit;}.css-annblr:hover{-webkit-text-decoration:underline;text-decoration:underline;}.css-t5muiy{margin:0;color:#168AFD;-webkit-text-decoration:underline;text-decoration:underline;text-decoration-color:rgba(22, 138, 253, 0.4);display:-webkit-inline-box;display:-webkit-inline-flex;display:-ms-inline-flexbox;display:inline-flex;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;-webkit-justify-content:center;justify-content:center;position:relative;box-sizing:border-box;-webkit-tap-highlight-color:transparent;background-color:transparent;outline:0;border:0;margin:0;border-radius:0;padding:0;cursor:pointer;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;vertical-align:middle;-moz-appearance:none;-webkit-appearance:none;-webkit-text-decoration:none;text-decoration:none;color:inherit;font-family:"Roboto","Helvetica","Arial",sans-serif;font-weight:500;font-size:1rem;line-height:1.75;letter-spacing:0.02857em;text-transform:uppercase;min-width:64px;padding:6px 8px;border-radius:4px;-webkit-transition:background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;transition:background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;color:inherit;border-color:currentColor;position:absolute;top:-100px;}.css-t5muiy:hover{text-decoration-color:inherit;}.css-t5muiy::-moz-focus-inner{border-style:none;}.css-t5muiy.Mui-disabled{pointer-events:none;cursor:default;}@media print{.css-t5muiy{-webkit-print-color-adjust:exact;color-adjust:exact;}}@media (max-width:899.95px){.css-t5muiy{font-size:0.875rem;}}.css-t5muiy:hover{-webkit-text-decoration:none;text-decoration:none;background-color:rgba(0, 0, 0, 0.04);}@media (hover: none){.css-t5muiy:hover{background-color:transparent;}}.css-t5muiy.Mui-disabled{color:rgba(0, 0, 0, 0.26);}.css-o7vnst{margin:0;-webkit-flex-shrink:0;-ms-flex-negative:0;flex-shrink:0;border-width:0;border-style:solid;border-color:rgba(0, 0, 0, 0.12);border-bottom-width:0;margin-top:8px;margin-bottom:8px;height:auto;border-right-width:thin;-webkit-align-self:stretch;-ms-flex-item-align:stretch;align-self:stretch;margin-left:16px;}.css-1t8mbjb{margin:0;color:inherit;-webkit-text-decoration:underline;text-decoration:underline;color:inherit;font-family:"Teko","Helvetica",sans-serif;font-size:1.725rem;font-weight:400;letter-spacing:inherit;-webkit-text-decoration:none;text-decoration:none;color:#000;margin-left:16px;}.css-1t8mbjb:hover{text-decoration-color:inherit;}.css-1t8mbjb:hover{-webkit-text-decoration:underline;text-decoration:underline;}.css-qy903u{min-width:50px;}.css-i9gxme{-webkit-box-flex:1;-webkit-flex-grow:1;-ms-flex-positive:1;flex-grow:1;}.css-39bbo6{margin:0;-webkit-flex-shrink:0;-ms-flex-negative:0;flex-shrink:0;border-width:0;border-style:solid;border-color:rgba(0, 0, 0, 0.12);border-bottom-width:thin;}.css-u6x7xu{display:-webkit-inline-box;display:-webkit-inline-flex;display:-ms-inline-flexbox;display:inline-flex;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;-webkit-justify-content:center;justify-content:center;position:relative;box-sizing:border-box;-webkit-tap-highlight-color:transparent;background-color:transparent;outline:0;border:0;margin:0;border-radius:0;padding:0;cursor:pointer;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;vertical-align:middle;-moz-appearance:none;-webkit-appearance:none;-webkit-text-decoration:none;text-decoration:none;color:inherit;text-align:center;-webkit-flex:0 0 auto;-ms-flex:0 0 auto;flex:0 0 auto;font-size:1.5rem;padding:8px;border-radius:50%;overflow:visible;color:rgba(0, 0, 0, 0.54);-webkit-transition:background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;transition:background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;height:64px;width:64px;padding:0px;position:fixed;left:350px;z-index:1200;top:64px;border-radius:0;-webkit-transition:left 225ms cubic-bezier(0.0, 0, 0.2, 1) 0ms,color 225ms cubic-bezier(0.0, 0, 0.2, 1) 0ms,background-color 225ms cubic-bezier(0.0, 0, 0.2, 1) 0ms;transition:left 225ms cubic-bezier(0.0, 0, 0.2, 1) 0ms,color 225ms cubic-bezier(0.0, 0, 0.2, 1) 0ms,background-color 225ms cubic-bezier(0.0, 0, 0.2, 1) 0ms;}.css-u6x7xu::-moz-focus-inner{border-style:none;}.css-u6x7xu.Mui-disabled{pointer-events:none;cursor:default;}@media print{.css-u6x7xu{-webkit-print-color-adjust:exact;color-adjust:exact;}}.css-u6x7xu:hover{background-color:rgba(0, 0, 0, 0.04);}@media (hover: none){.css-u6x7xu:hover{background-color:transparent;}}.css-u6x7xu.Mui-disabled{background-color:transparent;color:rgba(0, 0, 0, 0.26);}@media (min-width:0px){.css-u6x7xu{display:none;}}@media (min-width:900px){.css-u6x7xu{display:inherit;}}.css-u6x7xu:hover{color:#fff;background-color:#621BFB;}.css-vubbuv{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;width:1em;height:1em;display:inline-block;fill:currentColor;-webkit-flex-shrink:0;-ms-flex-negative:0;flex-shrink:0;-webkit-transition:fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;transition:fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;font-size:1.5rem;}.css-zthvur{-webkit-flex:0 0 auto;-ms-flex:0 0 auto;flex:0 0 auto;-webkit-flex-shrink:0;-ms-flex-negative:0;flex-shrink:0;}.css-zthvur .MuiDrawer-paper{width:350px;border:none;z-index:1099;box-sizing:border-box;}@media (min-width:0px){.css-zthvur .MuiDrawer-paper{display:none;}}@media (min-width:900px){.css-zthvur .MuiDrawer-paper{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;}}.css-1l8j5k8{background-color:#fff;color:rgba(0, 0, 0, 0.87);-webkit-transition:box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;transition:box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;box-shadow:none;overflow-y:auto;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column;height:100%;-webkit-flex:1 0 auto;-ms-flex:1 0 auto;flex:1 0 auto;z-index:1200;-webkit-overflow-scrolling:touch;position:fixed;top:0;outline:0;left:0;border-right:1px solid rgba(0, 0, 0, 0.12);}.css-15bvnbz{overflow-y:scroll;}.css-n79vzb{margin:0;-webkit-flex-shrink:0;-ms-flex-negative:0;flex-shrink:0;border-width:0;border-style:solid;border-color:rgba(0, 0, 0, 0.12);border-bottom-width:thin;margin-top:8px;margin-bottom:16px;}.css-1qu2wss{-webkit-box-flex:1;-webkit-flex-grow:1;-ms-flex-positive:1;flex-grow:1;-webkit-transition:margin 195ms cubic-bezier(0.4, 0, 0.6, 1) 0ms;transition:margin 195ms cubic-bezier(0.4, 0, 0.6, 1) 0ms;-webkit-flex-shrink:1;-ms-flex-negative:1;flex-shrink:1;}@media (min-width:0px){.css-1qu2wss{margin-left:0px;}}@media (min-width:900px){.css-1qu2wss{margin-left:350px;}}.css-fzbvyf{width:100%;margin-left:auto;box-sizing:border-box;margin-right:auto;display:block;padding-left:16px;padding-right:16px;padding:32px;}@media (min-width:600px){.css-fzbvyf{padding-left:24px;padding-right:24px;}}@media (min-width:900px){.css-fzbvyf{max-width:990px;}}.css-ao0lzw{margin:0;font-family:"Teko","Helvetica",sans-serif;font-weight:400;font-size:3.75rem;line-height:1.167;letter-spacing:inherit;margin-bottom:16px;margin-top:48px;}@media (max-width:599.95px){.css-ao0lzw{font-size:3.125rem;}}.css-1c2b0az{padding:16px 0px;display:grid;-webkit-column-gap:16px;column-gap:16px;grid-template-columns:1fr 1fr;}.css-yq1z8n{margin:0;font-family:"Teko","Helvetica",sans-serif;font-weight:400;font-size:2.5rem;line-height:1.2;letter-spacing:inherit;margin-bottom:16px;margin-top:48px;}@media (max-width:599.95px){.css-yq1z8n{font-size:2.25rem;}}.css-2cos1f{width:100%;margin-left:auto;box-sizing:border-box;margin-right:auto;display:block;padding-left:16px;padding-right:16px;position:relative;width:100%;height:0%;padding-bottom:56.25%;}@media (min-width:600px){.css-2cos1f{padding-left:24px;padding-right:24px;}}@media (min-width:1200px){.css-2cos1f{max-width:1280px;}}.css-aa9ijd{background-color:#fff;color:rgba(0, 0, 0, 0.87);-webkit-transition:box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;transition:box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;box-shadow:0px 2px 1px -1px rgba(0,0,0,0.2),0px 1px 1px 0px rgba(0,0,0,0.14),0px 1px 3px 0px rgba(0,0,0,0.12);padding:8px 0px;margin:32px 0px;}@media (min-width:0px){.css-aa9ijd{display:inherit;}}@media (min-width:900px){.css-aa9ijd{display:none;}}.css-49bjqz{width:100%;margin-left:auto;box-sizing:border-box;margin-right:auto;display:block;padding-left:16px;padding-right:16px;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column;-webkit-box-pack:center;-ms-flex-pack:center;-webkit-justify-content:center;justify-content:center;background-color:#002652;color:#ffffff;}@media (min-width:600px){.css-49bjqz{padding-left:24px;padding-right:24px;}}@media (min-width:1200px){.css-49bjqz{max-width:1280px;}}.css-1sfd1bq{background-color:inherit;margin:0 -600rem;padding:0 600rem;}.css-1fxno5d{width:100%;margin-left:auto;box-sizing:border-box;margin-right:auto;display:block;padding-left:16px;padding-right:16px;padding:32px 0px;display:grid;grid-template-columns:repeat(auto-fit, minmax(auto, 1fr));grid-gap:16px;}@media (min-width:600px){.css-1fxno5d{padding-left:24px;padding-right:24px;}}@media (min-width:900px){.css-1fxno5d{max-width:990px;}}.css-efpkj6{margin:0;color:#168AFD;-webkit-text-decoration:underline;text-decoration:underline;text-decoration-color:rgba(22, 138, 253, 0.4);margin:0;font-family:"Roboto","Helvetica","Arial",sans-serif;font-weight:400;font-size:1.125rem;line-height:1.5;letter-spacing:0.00833em;color:#ffffff;-webkit-text-decoration:none;text-decoration:none;}.css-efpkj6:hover{text-decoration-color:inherit;}@media (max-width:599.95px){.css-efpkj6{font-size:1rem;letter-spacing:0.00938em;line-height:1.5;}}</style><style data-emotion="css" data-s=""></style><script type="text/javascript" id="www-widgetapi-script" src="Aalto%20FITech101%20Courses_files/www-widgetapi.js" async=""></script><script type="text/javascript" charset="utf8" async="" src="Aalto%20FITech101%20Courses_files/iframe_api.es"></script><link rel="prefetch" href="https://fitech101.aalto.fi/page-data/index/page-data.json" crossorigin="anonymous" as="fetch"><link rel="prefetch" href="https://fitech101.aalto.fi/page-data/web-software-development/1-introduction-and-tooling/3-course-tools/page-data.json" crossorigin="anonymous" as="fetch"><link rel="prefetch" href="https://fitech101.aalto.fi/page-data/web-software-development/1-introduction-and-tooling/7-frequently-asked-questions/page-data.json" crossorigin="anonymous" as="fetch"><link rel="prefetch" href="https://fitech101.aalto.fi/page-data/web-software-development/1-introduction-and-tooling/1-overview/page-data.json" crossorigin="anonymous" as="fetch"><link rel="prefetch" href="https://fitech101.aalto.fi/component---src-templates-material-page-template-tsx-0bac1f0b88dbb8b084e5.js"><script src="Aalto%20FITech101%20Courses_files/mode-mode.js"></script></head><body style=""><div id="___gatsby"><div style="outline:none" tabindex="-1" id="gatsby-focus-wrapper"><div><header class="MuiPaper-root MuiPaper-elevation MuiPaper-elevation0 MuiAppBar-root MuiAppBar-colorPrimary MuiAppBar-positionFixed mui-fixed css-15d8vn0"><div class="MuiToolbar-root MuiToolbar-gutters MuiToolbar-regular css-i6s8oy"><div class="MuiBox-root css-w3ze74"><div class="MuiBox-root css-0"><a class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-annblr" href="https://fitech101.aalto.fi/"><div class="MuiBox-root css-qy903u">Home</div></a><a href="#skip-nav-target" class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit css-t5muiy" tabindex="0">Skip navigation<span class="MuiTouchRipple-root css-w0pj6f"></span></a></div><hr class="MuiDivider-root MuiDivider-middle MuiDivider-vertical MuiDivider-flexItem css-o7vnst"><a class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-1t8mbjb" href="https://fitech101.aalto.fi/web-software-development"><div class="MuiBox-root css-qy903u">Web Software Development</div></a><div class="MuiBox-root css-i9gxme"></div><div class="MuiBox-root css-q24otg"><button class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit css-1yw2v46" tabindex="0" type="button" data-e2e-hook="navbar-profile-menu-button" aria-label="account of current user" aria-controls="profile-menu" aria-haspopup="true"><svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-hjmalu" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="AccountCircleIcon"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 4c1.93 0 3.5 1.57 3.5 3.5S13.93 13 12 13s-3.5-1.57-3.5-3.5S10.07 6 12 6zm0 14c-2.03 0-4.43-.82-6.14-2.88C7.55 15.8 9.68 15 12 15s4.45.8 6.14 2.12C16.43 19.18 14.03 20 12 20z"></path></svg><p class="MuiTypography-root MuiTypography-body2 css-17vbmcb" data-e2e-hook="navbar-profile-menu-username">Loginkiller20@gmail.com</p><span class="MuiTouchRipple-root css-w0pj6f"></span></button><button class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeLarge css-1w8s6so" tabindex="0" type="button" aria-haspopup="true"><svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-o261au" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="NotificationsIcon"><path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.89 2 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"></path></svg><span class="MuiTouchRipple-root css-w0pj6f"></span></button></div></div></div><hr class="MuiDivider-root MuiDivider-fullWidth css-39bbo6"></header><div class="MuiToolbar-root MuiToolbar-gutters MuiToolbar-regular css-i6s8oy"></div> <div class="MuiBox-root css-0"><button class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium css-u6x7xu" tabindex="0" type="button"><svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-vubbuv" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="ChevronLeftIcon"><path d="M15.41 7.41 14 6l-6 6 6 6 1.41-1.41L10.83 12z"></path></svg><span class="MuiTouchRipple-root css-w0pj6f"></span></button><div class="MuiDrawer-root MuiDrawer-docked css-zthvur"><div class="MuiPaper-root MuiPaper-elevation MuiPaper-elevation0 MuiDrawer-paper MuiDrawer-paperAnchorLeft MuiDrawer-paperAnchorDockedLeft css-1l8j5k8"><div class="MuiToolbar-root MuiToolbar-gutters MuiToolbar-regular css-i6s8oy"></div><div class="MuiBox-root css-15bvnbz"><button class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit css-1x5jjmh" tabindex="0" type="button"><svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-hjmalu" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="ChatIcon"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z"></path></svg><p class="MuiTypography-root MuiTypography-body2 css-17vbmcb">Discussion forum</p><span class="MuiTouchRipple-root css-w0pj6f"></span></button><hr class="MuiDivider-root MuiDivider-fullWidth css-n79vzb"><ul class="MuiList-root css-14i6ogz" id="course-navigation"><li class="MuiListItem-root MuiListItem-padding css-11okdul"><button class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-fullWidth css-k8nrx" tabindex="0" type="button"><span class="MuiBox-root css-1pjdlc4">1.</span><span class="MuiBox-root css-scykb0">Introduction and Tooling</span><div class="MuiBox-root css-2oams8"><svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-1k33q06" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="ExpandLessIcon"><path d="m12 8-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14z"></path></svg></div><span class="MuiTouchRipple-root css-w0pj6f"></span></button></li><div class="MuiCollapse-root MuiCollapse-vertical MuiCollapse-entered css-c4sutr" style="min-height: 0px; height: auto; transition-duration: 300ms;"><div class="MuiCollapse-wrapper MuiCollapse-vertical css-hboir5"><div class="MuiCollapse-wrapperInner MuiCollapse-vertical css-8atqhb"><ul class="MuiList-root css-1uzmcsd" id="course-module-navigation-submodules 1"><li class="MuiListItem-root css-po60tm"><a class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-fullWidth css-o26dau" tabindex="0" href="https://fitech101.aalto.fi/web-software-development/1-introduction-and-tooling/1-overview/"><span class="MuiBox-root css-1pjdlc4">1.1. Overview</span><span class="MuiTouchRipple-root css-w0pj6f"></span></a></li><li class="MuiListItem-root css-po60tm"><a class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-fullWidth css-o26dau" tabindex="0" href="https://fitech101.aalto.fi/web-software-development/1-introduction-and-tooling/2-grading/"><span class="MuiBox-root css-1pjdlc4">1.2. Grading</span><span class="MuiTouchRipple-root css-w0pj6f"></span></a></li><li class="MuiListItem-root css-po60tm"><a class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-fullWidth css-o26dau" tabindex="0" href="https://fitech101.aalto.fi/web-software-development/1-introduction-and-tooling/3-course-tools/"><span class="MuiBox-root css-1pjdlc4">1.3. Course Tools</span><span class="MuiTouchRipple-root css-w0pj6f"></span></a></li><li class="MuiListItem-root css-po60tm"><a class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-fullWidth css-o26dau" tabindex="0" href="https://fitech101.aalto.fi/web-software-development/1-introduction-and-tooling/4-course-tools-linux/"><span class="MuiBox-root css-1pjdlc4">1.4. Course Tools: Linux</span><span class="MuiTouchRipple-root css-w0pj6f"></span></a></li><li class="MuiListItem-root css-po60tm"><a class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-fullWidth css-o26dau" tabindex="0" href="https://fitech101.aalto.fi/web-software-development/1-introduction-and-tooling/5-course-tools-macos/"><span class="MuiBox-root css-1pjdlc4">1.5. Course Tools: MacOS</span><span class="MuiTouchRipple-root css-w0pj6f"></span></a></li><li class="MuiListItem-root css-po60tm"><a class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-fullWidth css-o26dau" tabindex="0" href="https://fitech101.aalto.fi/web-software-development/1-introduction-and-tooling/6-course-tools-windows/"><span class="MuiBox-root css-1pjdlc4">1.6. Course Tools: Windows</span><span class="MuiTouchRipple-root css-w0pj6f"></span></a></li><li class="MuiListItem-root css-po60tm"><a class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-fullWidth css-o26dau" tabindex="0" href="https://fitech101.aalto.fi/web-software-development/1-introduction-and-tooling/7-frequently-asked-questions/"><span class="MuiBox-root css-1pjdlc4">1.7. Frequently Asked Questions</span><span class="MuiTouchRipple-root css-w0pj6f"></span></a></li><li class="MuiListItem-root css-po60tm"><a class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-fullWidth css-o26dau" tabindex="0" href="https://fitech101.aalto.fi/web-software-development/1-introduction-and-tooling/8-course-authors/"><span class="MuiBox-root css-1pjdlc4">1.8. Course Authors</span><span class="MuiTouchRipple-root css-w0pj6f"></span></a></li></ul></div></div></div><li class="MuiListItem-root MuiListItem-padding css-11okdul"><button class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-fullWidth css-k8nrx" tabindex="0" type="button"><span class="MuiBox-root css-1pjdlc4">2.</span><span class="MuiBox-root css-scykb0">HyperText Markup Language</span><div class="MuiBox-root css-2oams8"><svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-1k33q06" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="ExpandMoreIcon"><path d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"></path></svg></div><span class="MuiTouchRipple-root css-w0pj6f"></span></button></li><li class="MuiListItem-root MuiListItem-padding css-11okdul"><button class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-fullWidth css-k8nrx" tabindex="0" type="button"><span class="MuiBox-root css-1pjdlc4">3.</span><span class="MuiBox-root css-scykb0">Cascading Style Sheets</span><div class="MuiBox-root css-2oams8"><svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-1k33q06" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="ExpandLessIcon"><path d="m12 8-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14z"></path></svg></div><span class="MuiTouchRipple-root css-w0pj6f"></span></button></li><div class="MuiCollapse-root MuiCollapse-vertical MuiCollapse-entered css-c4sutr" style="min-height: 0px; height: auto; transition-duration: 300ms;"><div class="MuiCollapse-wrapper MuiCollapse-vertical css-hboir5"><div class="MuiCollapse-wrapperInner MuiCollapse-vertical css-8atqhb"><ul class="MuiList-root css-1uzmcsd" id="course-module-navigation-submodules 3"><li class="MuiListItem-root css-po60tm"><a class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-fullWidth css-o26dau" tabindex="0" href="https://fitech101.aalto.fi/web-software-development/3-cascading-style-sheets/1-styling-web-pages/"><span class="MuiBox-root css-1pjdlc4">3.1. Styling Web Pages</span><span class="MuiTouchRipple-root css-w0pj6f"></span></a></li><li class="MuiListItem-root css-po60tm"><a class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-fullWidth css-o26dau" tabindex="0" href="https://fitech101.aalto.fi/web-software-development/3-cascading-style-sheets/2-defining-and-using-styles/"><span class="MuiBox-root css-1pjdlc4">3.2. Defining and Using Styles</span><span class="MuiTouchRipple-root css-w0pj6f"></span></a></li><li class="MuiListItem-root css-po60tm"><a class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-fullWidth css-o26dau" tabindex="0" href="https://fitech101.aalto.fi/web-software-development/3-cascading-style-sheets/3-using-colors/"><span class="MuiBox-root css-1pjdlc4">3.3. Using Colors</span><span class="MuiTouchRipple-root css-w0pj6f"></span></a></li><li class="MuiListItem-root css-po60tm"><a class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-fullWidth css-o26dau" tabindex="0" href="https://fitech101.aalto.fi/web-software-development/3-cascading-style-sheets/4-using-fonts/"><span class="MuiBox-root css-1pjdlc4">3.4. Using Fonts</span><span class="MuiTouchRipple-root css-w0pj6f"></span></a></li><li class="MuiListItem-root css-po60tm"><a class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-fullWidth css-o26dau" tabindex="0" href="https://fitech101.aalto.fi/web-software-development/3-cascading-style-sheets/5-layout-mechanisms-and-flexbox/"><span class="MuiBox-root css-1pjdlc4">3.5. Layout Mechanisms and Flexbox</span><span class="MuiTouchRipple-root css-w0pj6f"></span></a></li><li class="MuiListItem-root css-po60tm"><a class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-fullWidth css-o26dau" tabindex="0" href="https://fitech101.aalto.fi/web-software-development/3-cascading-style-sheets/6-linking-html-and-styles/"><span class="MuiBox-root css-1pjdlc4">3.6. Inserting Styles to HTML</span><span class="MuiTouchRipple-root css-w0pj6f"></span></a></li><li class="MuiListItem-root css-po60tm"><a class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-fullWidth css-o26dau" tabindex="0" href="https://fitech101.aalto.fi/web-software-development/3-cascading-style-sheets/7-style-libraries/"><span class="MuiBox-root css-1pjdlc4">3.7. Style Libraries</span><span class="MuiTouchRipple-root css-w0pj6f"></span></a></li><li class="MuiListItem-root css-po60tm"><a class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-fullWidth css-o26dau" tabindex="0" href="https://fitech101.aalto.fi/web-software-development/3-cascading-style-sheets/99-questions-and-feedback/"><span class="MuiBox-root css-1pjdlc4">3.8. Questions and Feedback</span><span class="MuiTouchRipple-root css-w0pj6f"></span></a></li></ul></div></div></div><li class="MuiListItem-root MuiListItem-padding css-11okdul"><button class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-fullWidth css-k8nrx" tabindex="0" type="button"><span class="MuiBox-root css-x96nau">4.</span><span class="MuiBox-root css-1rktfnt">Showing a Page on the Web</span><div class="MuiBox-root css-2oams8"><svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-1k33q06" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="ExpandLessIcon"><path d="m12 8-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14z"></path></svg></div><span class="MuiTouchRipple-root css-w0pj6f"></span></button></li><div class="MuiCollapse-root MuiCollapse-vertical MuiCollapse-entered css-c4sutr" style="min-height: 0px; height: auto; transition-duration: 300ms;"><div class="MuiCollapse-wrapper MuiCollapse-vertical css-hboir5"><div class="MuiCollapse-wrapperInner MuiCollapse-vertical css-8atqhb"><ul class="MuiList-root css-1uzmcsd" id="course-module-navigation-submodules 4"><li class="MuiListItem-root css-po60tm"><a class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-fullWidth css-o26dau" tabindex="0" href="https://fitech101.aalto.fi/web-software-development/4-showing-pages-on-the-web/1-online-with-github-pages/" aria-current="page"><span class="MuiBox-root css-x96nau">4.1. Online with GitHub Pages</span><span class="MuiTouchRipple-root css-w0pj6f"></span></a></li><div class="MuiCollapse-root MuiCollapse-vertical MuiCollapse-entered css-c4sutr" style="min-height: 0px; height: auto; transition-duration: 300ms;"><div class="MuiCollapse-wrapper MuiCollapse-vertical css-hboir5"><div class="MuiCollapse-wrapperInner MuiCollapse-vertical css-8atqhb"><ul class="MuiList-root css-1uzmcsd" id="course-navigation-submodule-headers 4-1"></ul></div></div></div><li class="MuiListItem-root css-po60tm"><a class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-fullWidth css-o26dau" tabindex="0" href="https://fitech101.aalto.fi/web-software-development/4-showing-pages-on-the-web/99-feedback/"><span class="MuiBox-root css-1pjdlc4">4.2. Feedback</span><span class="MuiTouchRipple-root css-w0pj6f"></span></a></li></ul></div></div></div><li class="MuiListItem-root MuiListItem-padding css-11okdul"><button class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-fullWidth css-k8nrx" tabindex="0" type="button"><span class="MuiBox-root css-1pjdlc4">5.</span><span class="MuiBox-root css-scykb0">Internet and HTTP</span><div class="MuiBox-root css-2oams8"><svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-1k33q06" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="ExpandMoreIcon"><path d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"></path></svg></div><span class="MuiTouchRipple-root css-w0pj6f"></span></button></li><li class="MuiListItem-root MuiListItem-padding css-11okdul"><button class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-fullWidth css-k8nrx" tabindex="0" type="button"><span class="MuiBox-root css-1pjdlc4">6.</span><span class="MuiBox-root css-scykb0">JavaScript Primer</span><div class="MuiBox-root css-2oams8"><svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-1k33q06" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="ExpandMoreIcon"><path d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"></path></svg></div><span class="MuiTouchRipple-root css-w0pj6f"></span></button></li><li class="MuiListItem-root MuiListItem-padding css-11okdul"><button class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-fullWidth css-k8nrx" tabindex="0" type="button"><span class="MuiBox-root css-1pjdlc4">7.</span><span class="MuiBox-root css-scykb0">First Web Applications</span><div class="MuiBox-root css-2oams8"><svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-1k33q06" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="ExpandMoreIcon"><path d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"></path></svg></div><span class="MuiTouchRipple-root css-w0pj6f"></span></button></li><li class="MuiListItem-root MuiListItem-padding css-11okdul"><button class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-fullWidth css-k8nrx" tabindex="0" type="button"><span class="MuiBox-root css-1pjdlc4">8.</span><span class="MuiBox-root css-scykb0">Online Deployment I</span><div class="MuiBox-root css-2oams8"><svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-1k33q06" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="ExpandMoreIcon"><path d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"></path></svg></div><span class="MuiTouchRipple-root css-w0pj6f"></span></button></li><li class="MuiListItem-root MuiListItem-padding css-11okdul"><button class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-fullWidth css-k8nrx" tabindex="0" type="button"><span class="MuiBox-root css-1pjdlc4">9.</span><span class="MuiBox-root css-scykb0">Working with Containers</span><div class="MuiBox-root css-2oams8"><svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-1k33q06" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="ExpandMoreIcon"><path d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"></path></svg></div><span class="MuiTouchRipple-root css-w0pj6f"></span></button></li><li class="MuiListItem-root MuiListItem-padding css-11okdul"><button class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-fullWidth css-k8nrx" tabindex="0" type="button"><span class="MuiBox-root css-1pjdlc4">10.</span><span class="MuiBox-root css-scykb0">View Templates</span><div class="MuiBox-root css-2oams8"><svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-1k33q06" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="ExpandMoreIcon"><path d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"></path></svg></div><span class="MuiTouchRipple-root css-w0pj6f"></span></button></li><li class="MuiListItem-root MuiListItem-padding css-11okdul"><button class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-fullWidth css-k8nrx" tabindex="0" type="button"><span class="MuiBox-root css-1pjdlc4">11.</span><span class="MuiBox-root css-scykb0">Online Deployment II</span><div class="MuiBox-root css-2oams8"><svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-1k33q06" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="ExpandMoreIcon"><path d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"></path></svg></div><span class="MuiTouchRipple-root css-w0pj6f"></span></button></li><li class="MuiListItem-root MuiListItem-padding css-11okdul"><button class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-fullWidth css-k8nrx" tabindex="0" type="button"><span class="MuiBox-root css-1pjdlc4">12.</span><span class="MuiBox-root css-scykb0">Forms and Data</span><div class="MuiBox-root css-2oams8"><svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-1k33q06" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="ExpandMoreIcon"><path d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"></path></svg></div><span class="MuiTouchRipple-root css-w0pj6f"></span></button></li><li class="MuiListItem-root MuiListItem-padding css-11okdul"><button class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-fullWidth css-k8nrx" tabindex="0" type="button"><span class="MuiBox-root css-1pjdlc4">13.</span><span class="MuiBox-root css-scykb0">Working with Databases I</span><div class="MuiBox-root css-2oams8"><svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-1k33q06" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="ExpandMoreIcon"><path d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"></path></svg></div><span class="MuiTouchRipple-root css-w0pj6f"></span></button></li><li class="MuiListItem-root MuiListItem-padding css-11okdul"><button class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-fullWidth css-k8nrx" tabindex="0" type="button"><span class="MuiBox-root css-1pjdlc4">14.</span><span class="MuiBox-root css-scykb0">Working with Databases II</span><div class="MuiBox-root css-2oams8"><svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-1k33q06" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="ExpandMoreIcon"><path d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"></path></svg></div><span class="MuiTouchRipple-root css-w0pj6f"></span></button></li><li class="MuiListItem-root MuiListItem-padding css-11okdul"><button class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-fullWidth css-k8nrx" tabindex="0" type="button"><span class="MuiBox-root css-1pjdlc4">15.</span><span class="MuiBox-root css-scykb0">Online Deployment III</span><div class="MuiBox-root css-2oams8"><svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-1k33q06" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="ExpandMoreIcon"><path d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"></path></svg></div><span class="MuiTouchRipple-root css-w0pj6f"></span></button></li><li class="MuiListItem-root MuiListItem-padding css-11okdul"><button class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-fullWidth css-k8nrx" tabindex="0" type="button"><span class="MuiBox-root css-1pjdlc4">16.</span><span class="MuiBox-root css-scykb0">Web Application Architecture I</span><div class="MuiBox-root css-2oams8"><svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-1k33q06" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="ExpandMoreIcon"><path d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"></path></svg></div><span class="MuiTouchRipple-root css-w0pj6f"></span></button></li><li class="MuiListItem-root MuiListItem-padding css-11okdul"><button class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-fullWidth css-k8nrx" tabindex="0" type="button"><span class="MuiBox-root css-1pjdlc4">17.</span><span class="MuiBox-root css-scykb0">Application Example I</span><div class="MuiBox-root css-2oams8"><svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-1k33q06" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="ExpandMoreIcon"><path d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"></path></svg></div><span class="MuiTouchRipple-root css-w0pj6f"></span></button></li><li class="MuiListItem-root MuiListItem-padding css-11okdul"><button class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-fullWidth css-k8nrx" tabindex="0" type="button"><span class="MuiBox-root css-1pjdlc4">18.</span><span class="MuiBox-root css-scykb0">Managing Dependencies</span><div class="MuiBox-root css-2oams8"><svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-1k33q06" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="ExpandMoreIcon"><path d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"></path></svg></div><span class="MuiTouchRipple-root css-w0pj6f"></span></button></li><li class="MuiListItem-root MuiListItem-padding css-11okdul"><button class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-fullWidth css-k8nrx" tabindex="0" type="button"><span class="MuiBox-root css-1pjdlc4">19.</span><span class="MuiBox-root css-scykb0">Testing Web Applications I</span><div class="MuiBox-root css-2oams8"><svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-1k33q06" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="ExpandMoreIcon"><path d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"></path></svg></div><span class="MuiTouchRipple-root css-w0pj6f"></span></button></li><li class="MuiListItem-root MuiListItem-padding css-11okdul"><button class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-fullWidth css-k8nrx" tabindex="0" type="button"><span class="MuiBox-root css-1pjdlc4">20.</span><span class="MuiBox-root css-scykb0">Course Project I</span><div class="MuiBox-root css-2oams8"><svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-1k33q06" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="ExpandMoreIcon"><path d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"></path></svg></div><span class="MuiTouchRipple-root css-w0pj6f"></span></button></li><li class="MuiListItem-root MuiListItem-padding css-11okdul"><button class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-fullWidth css-k8nrx" tabindex="0" type="button"><span class="MuiBox-root css-1pjdlc4">21.</span><span class="MuiBox-root css-scykb0">Oak Web Framework</span><div class="MuiBox-root css-2oams8"><svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-1k33q06" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="ExpandMoreIcon"><path d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"></path></svg></div><span class="MuiTouchRipple-root css-w0pj6f"></span></button></li><li class="MuiListItem-root MuiListItem-padding css-11okdul"><button class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-fullWidth css-k8nrx" tabindex="0" type="button"><span class="MuiBox-root css-1pjdlc4">22.</span><span class="MuiBox-root css-scykb0">Routes, Request Methods, and View Templates</span><div class="MuiBox-root css-2oams8"><svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-1k33q06" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="ExpandMoreIcon"><path d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"></path></svg></div><span class="MuiTouchRipple-root css-w0pj6f"></span></button></li><li class="MuiListItem-root MuiListItem-padding css-11okdul"><button class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-fullWidth css-k8nrx" tabindex="0" type="button"><span class="MuiBox-root css-1pjdlc4">23.</span><span class="MuiBox-root css-scykb0">Forms and Databases with Oak</span><div class="MuiBox-root css-2oams8"><svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-1k33q06" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="ExpandMoreIcon"><path d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"></path></svg></div><span class="MuiTouchRipple-root css-w0pj6f"></span></button></li><li class="MuiListItem-root MuiListItem-padding css-11okdul"><button class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-fullWidth css-k8nrx" tabindex="0" type="button"><span class="MuiBox-root css-1pjdlc4">24.</span><span class="MuiBox-root css-scykb0">Cookies and Sessions</span><div class="MuiBox-root css-2oams8"><svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-1k33q06" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="ExpandMoreIcon"><path d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"></path></svg></div><span class="MuiTouchRipple-root css-w0pj6f"></span></button></li><li class="MuiListItem-root MuiListItem-padding css-11okdul"><button class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-fullWidth css-k8nrx" tabindex="0" type="button"><span class="MuiBox-root css-1pjdlc4">25.</span><span class="MuiBox-root css-scykb0">Authentication and Authorization</span><div class="MuiBox-root css-2oams8"><svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-1k33q06" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="ExpandMoreIcon"><path d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"></path></svg></div><span class="MuiTouchRipple-root css-w0pj6f"></span></button></li><li class="MuiListItem-root MuiListItem-padding css-11okdul"><button class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-fullWidth css-k8nrx" tabindex="0" type="button"><span class="MuiBox-root css-1pjdlc4">26.</span><span class="MuiBox-root css-scykb0">Data Validation</span><div class="MuiBox-root css-2oams8"><svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-1k33q06" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="ExpandMoreIcon"><path d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"></path></svg></div><span class="MuiTouchRipple-root css-w0pj6f"></span></button></li><li class="MuiListItem-root MuiListItem-padding css-11okdul"><button class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-fullWidth css-k8nrx" tabindex="0" type="button"><span class="MuiBox-root css-1pjdlc4">27.</span><span class="MuiBox-root css-scykb0">Application Programming Interfaces</span><div class="MuiBox-root css-2oams8"><svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-1k33q06" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="ExpandMoreIcon"><path d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"></path></svg></div><span class="MuiTouchRipple-root css-w0pj6f"></span></button></li><li class="MuiListItem-root MuiListItem-padding css-11okdul"><button class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-fullWidth css-k8nrx" tabindex="0" type="button"><span class="MuiBox-root css-1pjdlc4">28.</span><span class="MuiBox-root css-scykb0">Testing Web Applications II</span><div class="MuiBox-root css-2oams8"><svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-1k33q06" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="ExpandMoreIcon"><path d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"></path></svg></div><span class="MuiTouchRipple-root css-w0pj6f"></span></button></li><li class="MuiListItem-root MuiListItem-padding css-11okdul"><button class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-fullWidth css-k8nrx" tabindex="0" type="button"><span class="MuiBox-root css-1pjdlc4">29.</span><span class="MuiBox-root css-scykb0">Continuous Integration and Deployment</span><div class="MuiBox-root css-2oams8"><svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-1k33q06" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="ExpandMoreIcon"><path d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"></path></svg></div><span class="MuiTouchRipple-root css-w0pj6f"></span></button></li><li class="MuiListItem-root MuiListItem-padding css-11okdul"><button class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-fullWidth css-k8nrx" tabindex="0" type="button"><span class="MuiBox-root css-1pjdlc4">30.</span><span class="MuiBox-root css-scykb0">Handling Binary Content</span><div class="MuiBox-root css-2oams8"><svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-1k33q06" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="ExpandMoreIcon"><path d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"></path></svg></div><span class="MuiTouchRipple-root css-w0pj6f"></span></button></li><li class="MuiListItem-root MuiListItem-padding css-11okdul"><button class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-fullWidth css-k8nrx" tabindex="0" type="button"><span class="MuiBox-root css-1pjdlc4">31.</span><span class="MuiBox-root css-scykb0">Client-Side JavaScript</span><div class="MuiBox-root css-2oams8"><svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-1k33q06" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="ExpandMoreIcon"><path d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"></path></svg></div><span class="MuiTouchRipple-root css-w0pj6f"></span></button></li><li class="MuiListItem-root MuiListItem-padding css-11okdul"><button class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-fullWidth css-k8nrx" tabindex="0" type="button"><span class="MuiBox-root css-1pjdlc4">32.</span><span class="MuiBox-root css-scykb0">Web Security Basics</span><div class="MuiBox-root css-2oams8"><svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-1k33q06" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="ExpandMoreIcon"><path d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"></path></svg></div><span class="MuiTouchRipple-root css-w0pj6f"></span></button></li><li class="MuiListItem-root MuiListItem-padding css-11okdul"><button class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-fullWidth css-k8nrx" tabindex="0" type="button"><span class="MuiBox-root css-1pjdlc4">33.</span><span class="MuiBox-root css-scykb0">Web Application Architecture II</span><div class="MuiBox-root css-2oams8"><svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-1k33q06" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="ExpandMoreIcon"><path d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"></path></svg></div><span class="MuiTouchRipple-root css-w0pj6f"></span></button></li><li class="MuiListItem-root MuiListItem-padding css-11okdul"><button class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-fullWidth css-k8nrx" tabindex="0" type="button"><span class="MuiBox-root css-1pjdlc4">34.</span><span class="MuiBox-root css-scykb0">Application Example II</span><div class="MuiBox-root css-2oams8"><svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-1k33q06" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="ExpandMoreIcon"><path d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"></path></svg></div><span class="MuiTouchRipple-root css-w0pj6f"></span></button></li><li class="MuiListItem-root MuiListItem-padding css-11okdul"><button class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-fullWidth css-k8nrx" tabindex="0" type="button"><span class="MuiBox-root css-1pjdlc4">35.</span><span class="MuiBox-root css-scykb0">Course Project II</span><div class="MuiBox-root css-2oams8"><svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-1k33q06" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="ExpandMoreIcon"><path d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"></path></svg></div><span class="MuiTouchRipple-root css-w0pj6f"></span></button></li><li class="MuiListItem-root MuiListItem-padding css-11okdul"><button class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-fullWidth css-k8nrx" tabindex="0" type="button"><span class="MuiBox-root css-1pjdlc4">36.</span><span class="MuiBox-root css-scykb0">Older Projects</span><div class="MuiBox-root css-2oams8"><svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-1k33q06" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="ExpandMoreIcon"><path d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"></path></svg></div><span class="MuiTouchRipple-root css-w0pj6f"></span></button></li><li class="MuiListItem-root MuiListItem-padding css-11okdul"><button class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-fullWidth css-k8nrx" tabindex="0" type="button"><span class="MuiBox-root css-1pjdlc4">37.</span><span class="MuiBox-root css-scykb0">Notes on Application Performance</span><div class="MuiBox-root css-2oams8"><svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-1k33q06" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="ExpandMoreIcon"><path d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"></path></svg></div><span class="MuiTouchRipple-root css-w0pj6f"></span></button></li><li class="MuiListItem-root MuiListItem-padding css-11okdul"><button class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-fullWidth css-k8nrx" tabindex="0" type="button"><span class="MuiBox-root css-1pjdlc4">38.</span><span class="MuiBox-root css-scykb0">Other Frameworks and Languages</span><div class="MuiBox-root css-2oams8"><svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-1k33q06" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="ExpandMoreIcon"><path d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"></path></svg></div><span class="MuiTouchRipple-root css-w0pj6f"></span></button></li></ul></div></div></div><div class="MuiBox-root css-1qu2wss"><div class="MuiContainer-root MuiContainer-maxWidthMd css-fzbvyf"><button class="MuiButtonBase-root MuiFab-root MuiFab-circular MuiFab-sizeLarge MuiFab-default css-zdiglz" tabindex="0" type="button" aria-label="progress"><svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-vubbuv" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="DoneIcon"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"></path></svg><span class="MuiTouchRipple-root css-w0pj6f"></span></button><main id="skip-nav-target"><h1 class="MuiTypography-root MuiTypography-h1 css-ao0lzw" id="online-with-github-pages">Online with GitHub Pages</h1><nav class="MuiBox-root css-1c2b0az" id="navigaatio-edellinen-tai-seuraava-osa"><button class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-fullWidth css-114dnyc" tabindex="0" type="button" elevation="0">Previous part<span class="MuiTouchRipple-root css-w0pj6f"></span></button><button class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-fullWidth css-8b6u9w" tabindex="0" type="button" elevation="0">Next part<span class="MuiTouchRipple-root css-w0pj6f"></span></button></nav><div class="MuiPaper-root MuiPaper-elevation MuiPaper-elevation1 css-ynck0p"><div class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault css-11tzk1l"><svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge css-6flbmm" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="AssignmentIcon"><path d="M19 3h-4.18C14.4 1.84 13.3 1 12 1c-1.3 0-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 0c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm2 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"></path></svg></div><div><h2 class="MuiTypography-root MuiTypography-h2 css-16rmpnw">Learning objectives</h2><div class="MuiTypography-root MuiTypography-body1 css-ijv2xs"><ul><li>Knows how to deploy an HTML document online where it can be viewed by others.</li></ul></div></div></div><p>There
+ exists a large number of services that can be used to host content. In 
+the following example, we show how to move an HTML page to <a href="https://github.com/" target="_blank" rel="nofollow noopener noreferrer">GitHub</a>. Given an user account, we can create a new repository by clicking in <code class="language-text">New</code> button on the GitHub site.</p><p>This opens up a page for creating a new repository. In the following example, we create a repository called <code class="language-text">deploy-demo</code>.</p><figure class="gatsby-resp-image-figure" style="margin-bottom: 36px; margin-top: 36px; text-align: center; font-style: italic;">
+    <span class="gatsby-resp-image-wrapper" style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 788px;">
+      <span class="gatsby-resp-image-background-image" style="padding-bottom: 36%; position: relative; bottom: 0px; left: 0px; background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAHCAYAAAAIy204AAAACXBIWXMAAAsTAAALEwEAmpwYAAABGUlEQVQoz42Q227DIBBE/f9fWKW5+gY24MTGBuzgnMqkVauoD1ntiN3RajRMJoTgcDyx+9xjjOF0vlBWNXleJH6/P3DJC9bHg3cq01pTlBV5UaK1oapqhGyohXyKlxVCSrrrlXEcsXZksJZhsNhxoh+GNG8IYSbTpqMWDU2rELJN77ZvIrWylMohjWdX3Cjbkcl5nPd4HxIm53Ab5zzzspD9WI0xco+RGNc0/1dxfePLW25Gd/CS0a3vkVKilMJ0HUbrdPP4A7Z+4bJGK3bVBWOu3HrLYCfiuqK04XA8c84LLkVF02qW5c78jbDccXN49UE2LTMffZnyq0SD6m6EecH5gGx1QqtMEvAbHxb8fGfygW68Pl3y6/ALzMsbEzwHI/MAAAAASUVORK5CYII=&quot;); background-size: cover; display: block; opacity: 0;"></span>
+  <img class="gatsby-resp-image-image" alt="deployment new repository" title="Creating a new repository with the name 'deploy-demo'." src="Aalto%20FITech101%20Courses_files/deployment-new-repository.png" srcset="Aalto%20FITech101%20Courses_files/deployment-new-repository_002.png 400w, Aalto%20FITech101%20Courses_files/deployment-new-repository.png 788w" sizes="(max-width: 788px) 100vw, 788px" style="width: 100%; height: 100%; margin: 0px; vertical-align: middle; position: absolute; top: 0px; left: 0px; opacity: 1; color: inherit; box-shadow: transparent 0px 0px 0px 400px inset;" loading="lazy" decoding="async">
+    </span>
+    <figcaption class="gatsby-resp-image-figcaption">Creating a new repository with the name 'deploy-demo'.</figcaption>
+  </figure><p>When creating a new repository, set the repository as public and press <code class="language-text">Create repository</code>. After this, you see a page that shows that the repository has been created. Now, one possibility is to upload files using <code class="language-text">git</code> on the command line; we'll look into this later on in the course.</p><p>For
+ now, for the purpose of copying an HTML document (and maybe a CSS 
+document) online, we can upload the files directly from the user 
+interface. This can be done by clicking the <code class="language-text">uploading an existing file</code> link.</p><figure class="gatsby-resp-image-figure" style="margin-bottom: 36px; margin-top: 36px; text-align: center; font-style: italic;">
+    <span class="gatsby-resp-image-wrapper" style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 800px;">
+      <span class="gatsby-resp-image-background-image" style="padding-bottom: 23.25%; position: relative; bottom: 0px; left: 0px; background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAFCAYAAABFA8wzAAAACXBIWXMAAAsTAAALEwEAmpwYAAABIElEQVQY01WQ2W6CYBBGef8X6kVTtW6lRlBB0KooKqKgsi9isafxv2jSi5M5+WYyyYw0dgKmXiYw/Jyv8I5+SoSb5+Kvp7kJ+ikV/qxjJxQzmhujHROWUY2V/iC9yBptfcXb0KChmIxtn/fJgvZkQd+waI7mIm+N5iJrKibdqUVLNXkd6DQUg5Y6Y+6l7NIH0iKqcfMa9xxySQp2rscxyomKCv8aEKYZYVYQZTnXOOUSJfhBTJDkwuO85AHkVc3W9ZE6ps0TeXmgZ0V0NiXdTUnPLpHthM66pL9J6dvP/Manc2d8SFG3Pqrto9g+w42HfkxYP08eWCcU+8xQcGGwL+ltKxS3YuBUfOxu4l/yrkTeV8yCmlX8YBl9/2MV12LhLw1mbIezMyOxAAAAAElFTkSuQmCC&quot;); background-size: cover; display: block; transition: opacity 0.5s ease 0.5s; opacity: 0;"></span>
+  <img class="gatsby-resp-image-image" alt="deployment upload an existing file link" title="An empty repository has been created. There is a link with the text 'uploading an existing file'." src="Aalto%20FITech101%20Courses_files/deployment-upload-an-existing-file-link_002.png" srcset="Aalto%20FITech101%20Courses_files/deployment-upload-an-existing-file-link_003.png 400w, Aalto%20FITech101%20Courses_files/deployment-upload-an-existing-file-link_002.png 800w, Aalto%20FITech101%20Courses_files/deployment-upload-an-existing-file-link.png 897w" sizes="(max-width: 800px) 100vw, 800px" style="width: 100%; height: 100%; margin: 0px; vertical-align: middle; position: absolute; top: 0px; left: 0px; opacity: 1; transition: opacity 0.5s ease 0s; color: inherit; box-shadow: transparent 0px 0px 0px 400px inset;" loading="lazy" decoding="async">
+    </span>
+    <figcaption class="gatsby-resp-image-figcaption">An empty repository has been created. There is a link with the text 'uploading an existing file'.</figcaption>
+  </figure><p>When you click the link, you are shown a page that allows easy upload of files.</p><figure class="gatsby-resp-image-figure" style="margin-bottom: 36px; margin-top: 36px; text-align: center; font-style: italic;">
+    <span class="gatsby-resp-image-wrapper" style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 800px;">
+      <span class="gatsby-resp-image-background-image" style="padding-bottom: 28.75%; position: relative; bottom: 0px; left: 0px; background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAGCAYAAADDl76dAAAACXBIWXMAAAsTAAALEwEAmpwYAAAA1UlEQVQY042QWU+DQBSF+f+/y9bCQAU0QRJ4UGvcIEYFZmP4zIAkxJf2JCd3O3eZCaZp4hyttVyi8ww4A6kUD48nLkWglEJKSdd1aK0ZpJxjpTW+9vX9w0fT/uUVxpg5r9RS9wuHYZh7xnEk2O0PHKKYq92esiw5phn57R3FfUmWZQghSNMbsjynKAqqquY6FFR1TZIcCUVMGMVEIuHtvSEYnZvf/h993/Pa9jw1lpdPw3NrOLUGYx3OuVnj7er7GW77h+vQ1Xqhb1ZmobYL193bI7b+L4F/z0QfIaeAAAAAAElFTkSuQmCC&quot;); background-size: cover; display: block; transition: opacity 0.5s ease 0.5s; opacity: 0;"></span>
+  <img class="gatsby-resp-image-image" alt="deployment easy upload" title="Clicking the 'uploading an existing file' link opens up a view where files can be uploaded easily." src="Aalto%20FITech101%20Courses_files/deployment-easy-upload_002.png" srcset="Aalto%20FITech101%20Courses_files/deployment-easy-upload_003.png 400w, Aalto%20FITech101%20Courses_files/deployment-easy-upload_002.png 800w, Aalto%20FITech101%20Courses_files/deployment-easy-upload.png 810w" sizes="(max-width: 800px) 100vw, 800px" style="width: 100%; height: 100%; margin: 0px; vertical-align: middle; position: absolute; top: 0px; left: 0px; opacity: 1; transition: opacity 0.5s ease 0s; color: inherit; box-shadow: transparent 0px 0px 0px 400px inset;" loading="lazy" decoding="async">
+    </span>
+    <figcaption class="gatsby-resp-image-figcaption">Clicking the 'uploading an existing file' link opens up a view where files can be uploaded easily.</figcaption>
+  </figure><p>Drag and drop the files you wish to show online to the upload area. These files should include at least a file called <code class="language-text">index.html</code>.</p><p>This starts the upload of the files. Once the files have been uploaded, click the <code class="language-text">Commit changes</code> button.</p><p>When
+ the files have been processed and they are visible in the repository, 
+the next step is to enable GitHub Pages for the project. GitHub Pages is
+ essentially a service from GitHub that allows hosting content.</p><p>Start by clicking the <code class="language-text">Settings</code> of the repository and choosing <code class="language-text">Pages</code>. This should show a page similar to the following one.</p><figure class="gatsby-resp-image-figure" style="margin-bottom: 36px; margin-top: 36px; text-align: center; font-style: italic;">
+    <span class="gatsby-resp-image-wrapper" style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 800px;">
+      <span class="gatsby-resp-image-background-image" style="padding-bottom: 62%; position: relative; bottom: 0px; left: 0px; background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAMCAYAAABiDJ37AAAACXBIWXMAAAsTAAALEwEAmpwYAAABTUlEQVQoz61T21LDIBTk/z9RY0yapk2AhHuuwDqg7VTtg+3IzA5w4CzLciCnU4uiKNAej6jqGi+vBWKMeKalPOLWCLtEmDnAuglaa2hjYKyFtQ4mjY3NUErBOZfjWpu8N8WttVBaw4cA0vYCZcNAxQxjHYQQUEp/EV2STI5JKWGdyyRSqTxPa5lQaYREGMKO4Df8VyPDMOICSlkGYywrufjyCAilFJQxSKkwjp/EnA9w03QlvCX+ecgvhT2lOHc9lnXDtvvc+3Cb+JhK4qYZ7blHR3lGGitjny4dcmxbMMbvFFUAokeMAfu+w3t/RXrNBO/Dt1hW2DQN3qsaZVni0LSoqhpVfcBbfUbTjeho8nUA40Puk7+ptNI8CWGcg3OevZ+mCUQIiVPXQ0gJyobsp3MT3BJg54B1f+zqZF5W8EFg3Xz+KULpu1/qr4/yAdhLp0fpLPeOAAAAAElFTkSuQmCC&quot;); background-size: cover; display: block; transition: opacity 0.5s ease 0.5s; opacity: 0;"></span>
+  <img class="gatsby-resp-image-image" alt="deployment github pages" title="GitHub pages settings." src="Aalto%20FITech101%20Courses_files/deployment-github-pages_002.png" srcset="Aalto%20FITech101%20Courses_files/deployment-github-pages_003.png 400w, Aalto%20FITech101%20Courses_files/deployment-github-pages_002.png 800w, Aalto%20FITech101%20Courses_files/deployment-github-pages.png 925w" sizes="(max-width: 800px) 100vw, 800px" style="width: 100%; height: 100%; margin: 0px; vertical-align: middle; position: absolute; top: 0px; left: 0px; opacity: 1; transition: opacity 0.5s ease 0s; color: inherit; box-shadow: transparent 0px 0px 0px 400px inset;" loading="lazy" decoding="async">
+    </span>
+    <figcaption class="gatsby-resp-image-figcaption">GitHub pages settings.</figcaption>
+  </figure><p>Under <code class="language-text">Branch</code> under <code class="language-text">Build and deployment</code>, click on the dropdown menu that reads <code class="language-text">None</code>. Select <code class="language-text">main</code> and press <code class="language-text">Save</code>. Once pressed, the view should be similar to the following.</p><figure class="gatsby-resp-image-figure" style="margin-bottom: 36px; margin-top: 36px; text-align: center; font-style: italic;">
+    <span class="gatsby-resp-image-wrapper" style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 785px;">
+      <span class="gatsby-resp-image-background-image" style="padding-bottom: 46.75%; position: relative; bottom: 0px; left: 0px; background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAJCAYAAAAywQxIAAAACXBIWXMAAAsTAAALEwEAmpwYAAABD0lEQVQoz5WQbW+CMBRG+f+/b1kW51BkSt9bCihC8Sw1zk9z0ZucpB9unz49xa6uKTdb6vqbalezWn2y/iopNxuEVOS5XC5XnpkixkjX9Q8Xng26BwoheXv/QGlDaCPWB7R1DMcTyy3st+EzFHNa0NYjpEYZh1SGg1DEbmBZlpdbFk0jyKSU/vzua1wDG7ZVxf5woBGCRkisc4TgUUojpEQqRVaTyWdjLdpYpBQYPyDCjPQT/ZgopjlhrEdqw/E0Xj2uyy06X7Ke8zTTxh7fdqS03Nssjxxm+crkFx39cSTEgbLao2zAuJbxPNF2PSH2pJvTfx065zHG4r1DmA4dF2wPIiR0m9s7lFLkvWe8/gB+8btiChajOgAAAABJRU5ErkJggg==&quot;); background-size: cover; display: block; opacity: 0;"></span>
+  <img class="gatsby-resp-image-image" alt="deployment pages built from main" title="Selected a branch to deploy from in GitHub pages." src="Aalto%20FITech101%20Courses_files/deployment-pages-built-from-main.png" srcset="Aalto%20FITech101%20Courses_files/deployment-pages-built-from-main_002.png 400w, Aalto%20FITech101%20Courses_files/deployment-pages-built-from-main.png 785w" sizes="(max-width: 785px) 100vw, 785px" style="width: 100%; height: 100%; margin: 0px; vertical-align: middle; position: absolute; top: 0px; left: 0px; opacity: 1; color: inherit; box-shadow: transparent 0px 0px 0px 400px inset;" loading="lazy" decoding="async">
+    </span>
+    <figcaption class="gatsby-resp-image-figcaption">Selected a branch to deploy from in GitHub pages.</figcaption>
+  </figure><p>When we see the text <code class="language-text">Your GitHub Pages site is currently being built from the main branch</code>, the files that we previously copied to the repository will be deployed live and made visible for all.</p><p>In the case of the present demo, you can find the deployed page at <a href="https://fitech101.github.io/deploy-demo" target="_blank" rel="nofollow noopener noreferrer">https://fitech101.github.io/deploy-demo</a>. Note that the page at the given address is actually related to the course <a href="https://fitech101.aalto.fi/device-agnostic-design/" target="_blank" rel="nofollow noopener noreferrer">Device-Agnostic Design</a>, which will be available again during the spring.</p><nav class="MuiBox-root css-1c2b0az" id="navigaatio-edellinen-tai-seuraava-osa"><button class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-fullWidth css-114dnyc" tabindex="0" type="button" elevation="0">Previous part<span class="MuiTouchRipple-root css-w0pj6f"></span></button><button class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-fullWidth css-8b6u9w" tabindex="0" type="button" elevation="0">Next part<span class="MuiTouchRipple-root css-w0pj6f"></span></button></nav></main><div class="MuiPaper-root MuiPaper-elevation MuiPaper-elevation1 css-aa9ijd"><button class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit css-1x5jjmh" tabindex="0" type="button"><svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-hjmalu" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="ChatIcon"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z"></path></svg><p class="MuiTypography-root MuiTypography-body2 css-17vbmcb">Discussion forum</p><span class="MuiTouchRipple-root css-w0pj6f"></span></button><hr class="MuiDivider-root MuiDivider-fullWidth css-n79vzb"><ul class="MuiList-root css-1hcvl7o" id="course-navigation"><li class="MuiListItem-root MuiListItem-padding css-11okdul"><button class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-fullWidth css-k8nrx" tabindex="0" type="button"><span class="MuiBox-root css-1pjdlc4">1.</span><span class="MuiBox-root css-scykb0">Introduction and Tooling</span><div class="MuiBox-root css-2oams8"><svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-1k33q06" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="ExpandMoreIcon"><path d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"></path></svg></div><span class="MuiTouchRipple-root css-w0pj6f"></span></button></li><li class="MuiListItem-root MuiListItem-padding css-11okdul"><button class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-fullWidth css-k8nrx" tabindex="0" type="button"><span class="MuiBox-root css-1pjdlc4">2.</span><span class="MuiBox-root css-scykb0">HyperText Markup Language</span><div class="MuiBox-root css-2oams8"><svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-1k33q06" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="ExpandMoreIcon"><path d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"></path></svg></div><span class="MuiTouchRipple-root css-w0pj6f"></span></button></li><li class="MuiListItem-root MuiListItem-padding css-11okdul"><button class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-fullWidth css-k8nrx" tabindex="0" type="button"><span class="MuiBox-root css-1pjdlc4">3.</span><span class="MuiBox-root css-scykb0">Cascading Style Sheets</span><div class="MuiBox-root css-2oams8"><svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-1k33q06" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="ExpandMoreIcon"><path d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"></path></svg></div><span class="MuiTouchRipple-root css-w0pj6f"></span></button></li><li class="MuiListItem-root MuiListItem-padding css-11okdul"><button class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-fullWidth css-k8nrx" tabindex="0" type="button"><span class="MuiBox-root css-x96nau">4.</span><span class="MuiBox-root css-1rktfnt">Showing a Page on the Web</span><div class="MuiBox-root css-2oams8"><svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-1k33q06" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="ExpandLessIcon"><path d="m12 8-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14z"></path></svg></div><span class="MuiTouchRipple-root css-w0pj6f"></span></button></li><div class="MuiCollapse-root MuiCollapse-vertical MuiCollapse-entered css-c4sutr" style="min-height: 0px; height: auto; transition-duration: 300ms;"><div class="MuiCollapse-wrapper MuiCollapse-vertical css-hboir5"><div class="MuiCollapse-wrapperInner MuiCollapse-vertical css-8atqhb"><ul class="MuiList-root css-1uzmcsd" id="course-module-navigation-submodules 4"><li class="MuiListItem-root css-po60tm"><a aria-current="page" class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-fullWidth css-o26dau" tabindex="0" href="https://fitech101.aalto.fi/web-software-development/4-showing-pages-on-the-web/1-online-with-github-pages/"><span class="MuiBox-root css-x96nau">4.1. Online with GitHub Pages</span><span class="MuiTouchRipple-root css-w0pj6f"></span></a></li><div class="MuiCollapse-root MuiCollapse-vertical MuiCollapse-entered css-c4sutr" style="min-height: 0px;"><div class="MuiCollapse-wrapper MuiCollapse-vertical css-hboir5"><div class="MuiCollapse-wrapperInner MuiCollapse-vertical css-8atqhb"><ul class="MuiList-root css-1uzmcsd" id="course-navigation-submodule-headers 4-1"></ul></div></div></div><li class="MuiListItem-root css-po60tm"><a class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-fullWidth css-o26dau" tabindex="0" href="https://fitech101.aalto.fi/web-software-development/4-showing-pages-on-the-web/99-feedback/"><span class="MuiBox-root css-1pjdlc4">4.2. Feedback</span><span class="MuiTouchRipple-root css-w0pj6f"></span></a></li></ul></div></div></div><li class="MuiListItem-root MuiListItem-padding css-11okdul"><button class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-fullWidth css-k8nrx" tabindex="0" type="button"><span class="MuiBox-root css-1pjdlc4">5.</span><span class="MuiBox-root css-scykb0">Internet and HTTP</span><div class="MuiBox-root css-2oams8"><svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-1k33q06" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="ExpandMoreIcon"><path d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"></path></svg></div><span class="MuiTouchRipple-root css-w0pj6f"></span></button></li><li class="MuiListItem-root MuiListItem-padding css-11okdul"><button class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-fullWidth css-k8nrx" tabindex="0" type="button"><span class="MuiBox-root css-1pjdlc4">6.</span><span class="MuiBox-root css-scykb0">JavaScript Primer</span><div class="MuiBox-root css-2oams8"><svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-1k33q06" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="ExpandMoreIcon"><path d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"></path></svg></div><span class="MuiTouchRipple-root css-w0pj6f"></span></button></li><li class="MuiListItem-root MuiListItem-padding css-11okdul"><button class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-fullWidth css-k8nrx" tabindex="0" type="button"><span class="MuiBox-root css-1pjdlc4">7.</span><span class="MuiBox-root css-scykb0">First Web Applications</span><div class="MuiBox-root css-2oams8"><svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-1k33q06" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="ExpandMoreIcon"><path d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"></path></svg></div><span class="MuiTouchRipple-root css-w0pj6f"></span></button></li><li class="MuiListItem-root MuiListItem-padding css-11okdul"><button class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-fullWidth css-k8nrx" tabindex="0" type="button"><span class="MuiBox-root css-1pjdlc4">8.</span><span class="MuiBox-root css-scykb0">Online Deployment I</span><div class="MuiBox-root css-2oams8"><svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-1k33q06" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="ExpandMoreIcon"><path d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"></path></svg></div><span class="MuiTouchRipple-root css-w0pj6f"></span></button></li><li class="MuiListItem-root MuiListItem-padding css-11okdul"><button class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-fullWidth css-k8nrx" tabindex="0" type="button"><span class="MuiBox-root css-1pjdlc4">9.</span><span class="MuiBox-root css-scykb0">Working with Containers</span><div class="MuiBox-root css-2oams8"><svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-1k33q06" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="ExpandMoreIcon"><path d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"></path></svg></div><span class="MuiTouchRipple-root css-w0pj6f"></span></button></li><li class="MuiListItem-root MuiListItem-padding css-11okdul"><button class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-fullWidth css-k8nrx" tabindex="0" type="button"><span class="MuiBox-root css-1pjdlc4">10.</span><span class="MuiBox-root css-scykb0">View Templates</span><div class="MuiBox-root css-2oams8"><svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-1k33q06" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="ExpandMoreIcon"><path d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"></path></svg></div><span class="MuiTouchRipple-root css-w0pj6f"></span></button></li><li class="MuiListItem-root MuiListItem-padding css-11okdul"><button class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-fullWidth css-k8nrx" tabindex="0" type="button"><span class="MuiBox-root css-1pjdlc4">11.</span><span class="MuiBox-root css-scykb0">Online Deployment II</span><div class="MuiBox-root css-2oams8"><svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-1k33q06" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="ExpandMoreIcon"><path d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"></path></svg></div><span class="MuiTouchRipple-root css-w0pj6f"></span></button></li><li class="MuiListItem-root MuiListItem-padding css-11okdul"><button class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-fullWidth css-k8nrx" tabindex="0" type="button"><span class="MuiBox-root css-1pjdlc4">12.</span><span class="MuiBox-root css-scykb0">Forms and Data</span><div class="MuiBox-root css-2oams8"><svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-1k33q06" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="ExpandMoreIcon"><path d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"></path></svg></div><span class="MuiTouchRipple-root css-w0pj6f"></span></button></li><li class="MuiListItem-root MuiListItem-padding css-11okdul"><button class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-fullWidth css-k8nrx" tabindex="0" type="button"><span class="MuiBox-root css-1pjdlc4">13.</span><span class="MuiBox-root css-scykb0">Working with Databases I</span><div class="MuiBox-root css-2oams8"><svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-1k33q06" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="ExpandMoreIcon"><path d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"></path></svg></div><span class="MuiTouchRipple-root css-w0pj6f"></span></button></li><li class="MuiListItem-root MuiListItem-padding css-11okdul"><button class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-fullWidth css-k8nrx" tabindex="0" type="button"><span class="MuiBox-root css-1pjdlc4">14.</span><span class="MuiBox-root css-scykb0">Working with Databases II</span><div class="MuiBox-root css-2oams8"><svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-1k33q06" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="ExpandMoreIcon"><path d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"></path></svg></div><span class="MuiTouchRipple-root css-w0pj6f"></span></button></li><li class="MuiListItem-root MuiListItem-padding css-11okdul"><button class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-fullWidth css-k8nrx" tabindex="0" type="button"><span class="MuiBox-root css-1pjdlc4">15.</span><span class="MuiBox-root css-scykb0">Online Deployment III</span><div class="MuiBox-root css-2oams8"><svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-1k33q06" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="ExpandMoreIcon"><path d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"></path></svg></div><span class="MuiTouchRipple-root css-w0pj6f"></span></button></li><li class="MuiListItem-root MuiListItem-padding css-11okdul"><button class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-fullWidth css-k8nrx" tabindex="0" type="button"><span class="MuiBox-root css-1pjdlc4">16.</span><span class="MuiBox-root css-scykb0">Web Application Architecture I</span><div class="MuiBox-root css-2oams8"><svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-1k33q06" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="ExpandMoreIcon"><path d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"></path></svg></div><span class="MuiTouchRipple-root css-w0pj6f"></span></button></li><li class="MuiListItem-root MuiListItem-padding css-11okdul"><button class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-fullWidth css-k8nrx" tabindex="0" type="button"><span class="MuiBox-root css-1pjdlc4">17.</span><span class="MuiBox-root css-scykb0">Application Example I</span><div class="MuiBox-root css-2oams8"><svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-1k33q06" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="ExpandMoreIcon"><path d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"></path></svg></div><span class="MuiTouchRipple-root css-w0pj6f"></span></button></li><li class="MuiListItem-root MuiListItem-padding css-11okdul"><button class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-fullWidth css-k8nrx" tabindex="0" type="button"><span class="MuiBox-root css-1pjdlc4">18.</span><span class="MuiBox-root css-scykb0">Managing Dependencies</span><div class="MuiBox-root css-2oams8"><svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-1k33q06" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="ExpandMoreIcon"><path d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"></path></svg></div><span class="MuiTouchRipple-root css-w0pj6f"></span></button></li><li class="MuiListItem-root MuiListItem-padding css-11okdul"><button class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-fullWidth css-k8nrx" tabindex="0" type="button"><span class="MuiBox-root css-1pjdlc4">19.</span><span class="MuiBox-root css-scykb0">Testing Web Applications I</span><div class="MuiBox-root css-2oams8"><svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-1k33q06" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="ExpandMoreIcon"><path d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"></path></svg></div><span class="MuiTouchRipple-root css-w0pj6f"></span></button></li><li class="MuiListItem-root MuiListItem-padding css-11okdul"><button class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-fullWidth css-k8nrx" tabindex="0" type="button"><span class="MuiBox-root css-1pjdlc4">20.</span><span class="MuiBox-root css-scykb0">Course Project I</span><div class="MuiBox-root css-2oams8"><svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-1k33q06" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="ExpandMoreIcon"><path d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"></path></svg></div><span class="MuiTouchRipple-root css-w0pj6f"></span></button></li><li class="MuiListItem-root MuiListItem-padding css-11okdul"><button class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-fullWidth css-k8nrx" tabindex="0" type="button"><span class="MuiBox-root css-1pjdlc4">21.</span><span class="MuiBox-root css-scykb0">Oak Web Framework</span><div class="MuiBox-root css-2oams8"><svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-1k33q06" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="ExpandMoreIcon"><path d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"></path></svg></div><span class="MuiTouchRipple-root css-w0pj6f"></span></button></li><li class="MuiListItem-root MuiListItem-padding css-11okdul"><button class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-fullWidth css-k8nrx" tabindex="0" type="button"><span class="MuiBox-root css-1pjdlc4">22.</span><span class="MuiBox-root css-scykb0">Routes, Request Methods, and View Templates</span><div class="MuiBox-root css-2oams8"><svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-1k33q06" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="ExpandMoreIcon"><path d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"></path></svg></div><span class="MuiTouchRipple-root css-w0pj6f"></span></button></li><li class="MuiListItem-root MuiListItem-padding css-11okdul"><button class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-fullWidth css-k8nrx" tabindex="0" type="button"><span class="MuiBox-root css-1pjdlc4">23.</span><span class="MuiBox-root css-scykb0">Forms and Databases with Oak</span><div class="MuiBox-root css-2oams8"><svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-1k33q06" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="ExpandMoreIcon"><path d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"></path></svg></div><span class="MuiTouchRipple-root css-w0pj6f"></span></button></li><li class="MuiListItem-root MuiListItem-padding css-11okdul"><button class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-fullWidth css-k8nrx" tabindex="0" type="button"><span class="MuiBox-root css-1pjdlc4">24.</span><span class="MuiBox-root css-scykb0">Cookies and Sessions</span><div class="MuiBox-root css-2oams8"><svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-1k33q06" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="ExpandMoreIcon"><path d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"></path></svg></div><span class="MuiTouchRipple-root css-w0pj6f"></span></button></li><li class="MuiListItem-root MuiListItem-padding css-11okdul"><button class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-fullWidth css-k8nrx" tabindex="0" type="button"><span class="MuiBox-root css-1pjdlc4">25.</span><span class="MuiBox-root css-scykb0">Authentication and Authorization</span><div class="MuiBox-root css-2oams8"><svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-1k33q06" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="ExpandMoreIcon"><path d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"></path></svg></div><span class="MuiTouchRipple-root css-w0pj6f"></span></button></li><li class="MuiListItem-root MuiListItem-padding css-11okdul"><button class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-fullWidth css-k8nrx" tabindex="0" type="button"><span class="MuiBox-root css-1pjdlc4">26.</span><span class="MuiBox-root css-scykb0">Data Validation</span><div class="MuiBox-root css-2oams8"><svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-1k33q06" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="ExpandMoreIcon"><path d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"></path></svg></div><span class="MuiTouchRipple-root css-w0pj6f"></span></button></li><li class="MuiListItem-root MuiListItem-padding css-11okdul"><button class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-fullWidth css-k8nrx" tabindex="0" type="button"><span class="MuiBox-root css-1pjdlc4">27.</span><span class="MuiBox-root css-scykb0">Application Programming Interfaces</span><div class="MuiBox-root css-2oams8"><svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-1k33q06" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="ExpandMoreIcon"><path d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"></path></svg></div><span class="MuiTouchRipple-root css-w0pj6f"></span></button></li><li class="MuiListItem-root MuiListItem-padding css-11okdul"><button class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-fullWidth css-k8nrx" tabindex="0" type="button"><span class="MuiBox-root css-1pjdlc4">28.</span><span class="MuiBox-root css-scykb0">Testing Web Applications II</span><div class="MuiBox-root css-2oams8"><svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-1k33q06" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="ExpandMoreIcon"><path d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"></path></svg></div><span class="MuiTouchRipple-root css-w0pj6f"></span></button></li><li class="MuiListItem-root MuiListItem-padding css-11okdul"><button class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-fullWidth css-k8nrx" tabindex="0" type="button"><span class="MuiBox-root css-1pjdlc4">29.</span><span class="MuiBox-root css-scykb0">Continuous Integration and Deployment</span><div class="MuiBox-root css-2oams8"><svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-1k33q06" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="ExpandMoreIcon"><path d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"></path></svg></div><span class="MuiTouchRipple-root css-w0pj6f"></span></button></li><li class="MuiListItem-root MuiListItem-padding css-11okdul"><button class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-fullWidth css-k8nrx" tabindex="0" type="button"><span class="MuiBox-root css-1pjdlc4">30.</span><span class="MuiBox-root css-scykb0">Handling Binary Content</span><div class="MuiBox-root css-2oams8"><svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-1k33q06" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="ExpandMoreIcon"><path d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"></path></svg></div><span class="MuiTouchRipple-root css-w0pj6f"></span></button></li><li class="MuiListItem-root MuiListItem-padding css-11okdul"><button class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-fullWidth css-k8nrx" tabindex="0" type="button"><span class="MuiBox-root css-1pjdlc4">31.</span><span class="MuiBox-root css-scykb0">Client-Side JavaScript</span><div class="MuiBox-root css-2oams8"><svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-1k33q06" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="ExpandMoreIcon"><path d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"></path></svg></div><span class="MuiTouchRipple-root css-w0pj6f"></span></button></li><li class="MuiListItem-root MuiListItem-padding css-11okdul"><button class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-fullWidth css-k8nrx" tabindex="0" type="button"><span class="MuiBox-root css-1pjdlc4">32.</span><span class="MuiBox-root css-scykb0">Web Security Basics</span><div class="MuiBox-root css-2oams8"><svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-1k33q06" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="ExpandMoreIcon"><path d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"></path></svg></div><span class="MuiTouchRipple-root css-w0pj6f"></span></button></li><li class="MuiListItem-root MuiListItem-padding css-11okdul"><button class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-fullWidth css-k8nrx" tabindex="0" type="button"><span class="MuiBox-root css-1pjdlc4">33.</span><span class="MuiBox-root css-scykb0">Web Application Architecture II</span><div class="MuiBox-root css-2oams8"><svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-1k33q06" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="ExpandMoreIcon"><path d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"></path></svg></div><span class="MuiTouchRipple-root css-w0pj6f"></span></button></li><li class="MuiListItem-root MuiListItem-padding css-11okdul"><button class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-fullWidth css-k8nrx" tabindex="0" type="button"><span class="MuiBox-root css-1pjdlc4">34.</span><span class="MuiBox-root css-scykb0">Application Example II</span><div class="MuiBox-root css-2oams8"><svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-1k33q06" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="ExpandMoreIcon"><path d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"></path></svg></div><span class="MuiTouchRipple-root css-w0pj6f"></span></button></li><li class="MuiListItem-root MuiListItem-padding css-11okdul"><button class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-fullWidth css-k8nrx" tabindex="0" type="button"><span class="MuiBox-root css-1pjdlc4">35.</span><span class="MuiBox-root css-scykb0">Course Project II</span><div class="MuiBox-root css-2oams8"><svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-1k33q06" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="ExpandMoreIcon"><path d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"></path></svg></div><span class="MuiTouchRipple-root css-w0pj6f"></span></button></li><li class="MuiListItem-root MuiListItem-padding css-11okdul"><button class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-fullWidth css-k8nrx" tabindex="0" type="button"><span class="MuiBox-root css-1pjdlc4">36.</span><span class="MuiBox-root css-scykb0">Older Projects</span><div class="MuiBox-root css-2oams8"><svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-1k33q06" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="ExpandMoreIcon"><path d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"></path></svg></div><span class="MuiTouchRipple-root css-w0pj6f"></span></button></li><li class="MuiListItem-root MuiListItem-padding css-11okdul"><button class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-fullWidth css-k8nrx" tabindex="0" type="button"><span class="MuiBox-root css-1pjdlc4">37.</span><span class="MuiBox-root css-scykb0">Notes on Application Performance</span><div class="MuiBox-root css-2oams8"><svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-1k33q06" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="ExpandMoreIcon"><path d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"></path></svg></div><span class="MuiTouchRipple-root css-w0pj6f"></span></button></li><li class="MuiListItem-root MuiListItem-padding css-11okdul"><button class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-fullWidth css-k8nrx" tabindex="0" type="button"><span class="MuiBox-root css-1pjdlc4">38.</span><span class="MuiBox-root css-scykb0">Other Frameworks and Languages</span><div class="MuiBox-root css-2oams8"><svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-1k33q06" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="ExpandMoreIcon"><path d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"></path></svg></div><span class="MuiTouchRipple-root css-w0pj6f"></span></button></li></ul></div></div><footer class="MuiContainer-root MuiContainer-maxWidthLg css-49bjqz"><div class="MuiBox-root css-1sfd1bq"><div class="MuiContainer-root MuiContainer-maxWidthMd css-1fxno5d"><a class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways MuiTypography-root MuiTypography-body1 css-efpkj6" href="https://fitech101.aalto.fi/">Home</a><a class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways MuiTypography-root MuiTypography-body1 css-efpkj6" href="https://fitech101.aalto.fi/credits">Credits</a><a class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways MuiTypography-root MuiTypography-body1 css-efpkj6" href="https://fitech101.aalto.fi/privacy-notice">Privacy notice</a><a class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways MuiTypography-root MuiTypography-body1 css-efpkj6" href="https://fitech101.aalto.fi/accessibility-statement">Accessibility statement</a><a class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways MuiTypography-root MuiTypography-body1 css-efpkj6" href="https://fitech101.aalto.fi/research-outline">Research outline</a></div></div></footer></div></div></div></div><div id="gatsby-announcer" style="position:absolute;top:0;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0" aria-live="assertive" aria-atomic="true">Navigated to Online with GitHub Pages</div></div><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/web-software-development/1-introduction-and-tooling/4-course-tools-linux/";window.___webpackCompilationHash="abfa193cd4cc0a9aa3a2";/*]]>*/</script><script id="gatsby-chunk-mapping">/*<![CDATA[*/window.___chunkMapping={"polyfill":["/polyfill-de062bc8da84b4124bb5.js"],"app":["/app-bd49f93024429862652f.js"],"component---src-pages-404-tsx":["/component---src-pages-404-tsx-06001a958885cad936ad.js"],"component---src-pages-code-reading-experiment-index-tsx":["/component---src-pages-code-reading-experiment-index-tsx-2ad3226e22f6acee0985.js"],"component---src-pages-content-creation-assignments-index-tsx":["/component---src-pages-content-creation-assignments-index-tsx-3164aea5e0bdb6a2413a.js"],"component---src-pages-content-creation-index-tsx":["/component---src-pages-content-creation-index-tsx-0849927fa7d1508c9730.js"],"component---src-pages-content-creation-personalised-content-index-tsx":["/component---src-pages-content-creation-personalised-content-index-tsx-f81dab56cbea3c777370.js"],"component---src-pages-grading-index-tsx":["/component---src-pages-grading-index-tsx-44d9edf02e929f93d761.js"],"component---src-pages-help-requests-24-bebf-8-f-b-5-df-4134-a-08-d-e-4-b-1-f-04784-f-0-tsx":["/component---src-pages-help-requests-24-bebf-8-f-b-5-df-4134-a-08-d-e-4-b-1-f-04784-f-0-tsx-28fa5755db979e41796f.js"],"component---src-pages-help-requests-index-tsx":["/component---src-pages-help-requests-index-tsx-24a91ec0f42ccbded37d.js"],"component---src-pages-peer-quiz-index-tsx":["/component---src-pages-peer-quiz-index-tsx-0f3a8f2d78b695f2c0b0.js"],"component---src-pages-project-reviews-index-tsx":["/component---src-pages-project-reviews-index-tsx-f9d508a50301a888997f.js"],"component---src-pages-testing-index-tsx":["/component---src-pages-testing-index-tsx-e27e691c91c54b48c117.js"],"component---src-pages-typing-experiment-index-tsx":["/component---src-pages-typing-experiment-index-tsx-4f48ff99529c34830e94.js"],"component---src-templates-course-page-template-tsx":["/component---src-templates-course-page-template-tsx-6e68d49403941764b28b.js"],"component---src-templates-front-page-template-tsx":["/component---src-templates-front-page-template-tsx-39e1860610aed03f7992.js"],"component---src-templates-generic-page-template-tsx":["/component---src-templates-generic-page-template-tsx-3341805b8a80d608129a.js"],"component---src-templates-material-page-template-tsx":["/component---src-templates-material-page-template-tsx-0bac1f0b88dbb8b084e5.js"]};/*]]>*/</script><script src="Aalto%20FITech101%20Courses_files/polyfill-de062bc8da84b4124bb5.js" nomodule=""></script><script src="Aalto%20FITech101%20Courses_files/app-bd49f93024429862652f.js" async=""></script><script src="Aalto%20FITech101%20Courses_files/8a28b14e-3b86fa7876e12a0068d4.js" async=""></script><script src="Aalto%20FITech101%20Courses_files/framework-762299b7626b0dbcc5d8.js" async=""></script><script src="Aalto%20FITech101%20Courses_files/webpack-runtime-e4e7788e9e94df820e91.js" async=""></script><div role="presentation" class="MuiPopover-root MuiMenu-root MuiModal-root MuiModal-hidden css-xuzscv" id="profile-menu" aria-hidden="true"><div aria-hidden="true" class="MuiBackdrop-root MuiBackdrop-invisible css-esi9ax" style="opacity: 0; visibility: hidden;"></div><div tabindex="-1" data-testid="sentinelStart"></div><div class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiPaper-root MuiMenu-paper MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation8 MuiPopover-paper css-177ic5c" style="opacity: 0; transform: scale(0.75, 0.5625); visibility: hidden;" tabindex="-1"><ul class="MuiList-root MuiList-padding MuiMenu-list css-r8u8y9" role="menu" tabindex="-1"><li class="MuiButtonBase-root MuiMenuItem-root Mui-disabled MuiMenuItem-gutters Mui-disabled css-fx69rb" tabindex="-1" role="menuitem" aria-disabled="true">Loginkiller20@gmail.com</li><li class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters css-fx69rb" tabindex="0" role="menuitem" data-e2e-hook="navbar-profile-menu-info-button">User information<span class="MuiTouchRipple-root css-w0pj6f"></span></li><li class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters css-fx69rb" tabindex="-1" role="menuitem">Help requests<span class="MuiTouchRipple-root css-w0pj6f"></span></li><li class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters css-fx69rb" tabindex="-1" role="menuitem" data-e2e-hook="navbar-profile-menu-logout-button">Sign out<span class="MuiTouchRipple-root css-w0pj6f"></span></li></ul></div><div tabindex="-1" data-testid="sentinelEnd"></div></div></body></html>
